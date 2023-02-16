@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css"
+    />
+     <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+    --bs-font-sans-serif: "DM Sans", sans-serif;
+    }
+
+    @media (min-width: 576px) {
+    .card {
+      border: 0;
+      box-shadow: rgb(0 0 0 / 5%) 0px 10px 20px;
+      border-radius: 10px;
+    }
+
+    .card-img-top {
+      width: 100%;
+      height: 20vw;
+      object-fit: cover;
+    }
+    }
+  </style>
+
+  <title>Streamify</title>
+  </head>
+
+   <body>
+    <div class="container mt-2" style="max-width: 72em">
+
+      <nav class="navbar navbar-expand-lg navbar-light bg-dark rounded container-fluid">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample10" aria-controls="navbarsExample10" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="text-light">
+          <h3>tokenSwap</h3>
+        </div>
+
+       
+        <span class="nav-link border rounded-pill bg-light justify-content-md-left">
+            <span id="balance">0</span>
+            cUSD
+          </span>
+      </nav>
+
+  <main id="marketplace" class="row">
+    <div>
+    <div class="d-flex bg-success flex-row" style="height: 100vh">
+    <div class="d-flex flex-row">
+  <div class="p-2">
+    <h4>Get Test Tokens</h4>
+    <span>This faucet transfers TestToken on Alfajores testnet.</span><br>
+    <span>Confirm details before submitting.</span>
+     
+
+    <div>
+      <h5>Network</h5>
+      <span>Alfajores</span>
+    </div>
+    <div>
+      <h4>Wallet</h4>
+
+      <input type="text" name="test" id="tokenId">
+    </div>
+    <button type="submit" id="claimToken">Submit</button>
+  </div>
+
+  
+  <div class="p-2">
+    <h4>Test balances</h4>
+    <table class="table table-fixed">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Celo</th>
+          <th scope="col">cUSD</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td id="celoBal">loading...</td>
+          <td id="cUSDBal">loading...</td>
+        </tr>
+      </tbody>
+    </table>
+     Note: 
+    <ol type="1" >
+      <li class="list-group-item">After submitting, you will recieve 1 Celo token in your wallet.</li>
+      <li class="list-group-item">You can only claim the test tokens once in 24 hours</li>
+       <li class="list-group-item">Donate excess Celo tokens to this address.<br>0xc94f1eaB4B3E9427Fa9aaF602dF7ED07217Ce73b</li>
+    </ol>
+  </div>
+</div>
+
+  <div class="p-2">
+    <h4>Swap Tokens</h4>
+    <span>Deposit cUSD to receive celo tokens</span><br>
+    <h5>cUSD => Celo</h5>
+    
+    <input type="number" name="swapAmount" id="swapAmount" placeholder="Enter amount of cUSD to deposit">
+    <button type="submit" id="swapToken">Swap</button>
+  </div>
+
+</div>
+
+    </div>
+  </main>
+</div>
+

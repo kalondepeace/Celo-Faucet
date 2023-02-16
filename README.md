@@ -102,11 +102,11 @@ Now we have a way on how to interact with out tokens.
     uint ERC20_DECIMALS = 18;
 ```
 
-Declare a variable `cUsdTokenAddress`, first, by specifying its type(address). Then you can specify the visibilty of the variable using the keyword  internal, because you want the variable to only be accessed inside the contract. Learn more on visibility
+Declare a variable `celoTokenAddress`, first, by specifying its type(address). Then you can specify the visibilty of the variable using the keyword  internal, because you want the variable to only be accessed inside the contract. Learn more on visibility
 
 Assign it the contract address of the token(Celo), that we will be using in this tutorial.
 
-You declare a variable `ERC20_DECIMALS`, its of type uint. Assign it the number 18, which is the number of deciamsl the Celo token has. (learn more on token decimals)[]
+You declare a variable `ERC20_DECIMALS`, its of type uint. Assign it the number 18, which is the number of decimals the Celo token has. (learn more on token decimals)[]
 
 
 
@@ -121,41 +121,41 @@ Users will only be able to request tokens once per 24 hours.
 
 contract Faucet{
 
-	mapping (address => uint) public lastClaim;
+	mapping (address => uint) public lastRequest;
 
   uint requestAmount = 10 ** ERC_DECIMALS;
 
    function requestTokens(address _to) public{
 
-    require((lastClaim[msg.sender] + 1 days) < block.timestamp,"You only claim once in 24 hours");
+    require((lastRequest[msg.sender] + 1 days) < block.timestamp,"You only claim once in 24 hours");
 
     require(IERC20Token(celoTokenAddress).balanceOf(address(this)) >= requestAmount,"Insufficient funds");
 
     require(IERC20Token(celoTokenAddress).transfer(payable(msg.sender),requestAmount),"token claim failed");
 
-    lastClaim[msg.sender] = block.timestamp;
+    lastRequest[msg.sender] = block.timestamp;
   }
 
 }
 ```
-To track the last time the user requested for tokens, declare a variable `lastClaim`, is of mapping type. mapping allows you to store key: value pairs. the key is the address of the user, and the value is the last time they requested the tokens. (learn more on mapping)[]
+To track the last time the user requested for tokens, create a variable `lastRequest`. It is of type mapping. Mapping allows you to store key: value pairs. the key will be the address of the user, and the value will be the last time they requested the tokens. (learn more on mapping)[]
 
 You also declare a variable `requestAmount`, of type uint. Assign it the amount of tokens the user will recieve, in our case 1 Celo.
 
 Next, create a function to let a user request tokens from the faucet and name it `requestTokens`.
 
-You have to specify the type of parameter th function takes. In this case, an address and name it `_to`. This is the address of the user who will receive the tokens.
+You have to specify the type of parameter the function takes. In this case, an address. Name it `_to`. This is the address of the user who will receive the tokens.
 
 You also define the visibility of the function as `public`.
 
 Inside the function, first check the last time the user requested for the tokens. It should be more than 24 hours from the current time. 
 
-You make sure this condition is always met before sending th tokens by using the keyword `require`. If the condition inside the require keyword fails, the whole function will stop executing. (Learn more about require)
+You make sure this condition is always met before sending th tokens, by using the keyword `require`. If the condition inside the require keyword fails, the whole function will stop executing. [Learn more about require]()
 
 
 Next, you check to make sure the smart contract has enough Celo tokens to send to the user. 
 
-NOw that all the above conditions, You go ahead and transfer the amount of tokens requested from the contract to the user address.
+Now that all the above conditions, you go ahead and transfer the amount of tokens requested from the contract to the user's address.
 
 Lastly, you update the last time that the user requested the tokens. Assign it the `block.timestamp`, which references the time when the function was executed. block.timestamp is a global variable. (Learn more about global variables)
 
@@ -164,7 +164,7 @@ code for this section.
 
 ### 1.5 Swap Token Function
 
-What happens when a user needs to request more tokens when the 24 hour gap has not elapsed?. In this section, you will enable the user to receive Celo tokens by completing a certain task. 
+What shuold happens if a user needs more tokens when the 24 hour gap has not elapsed?. In this section, you will enable the user to receive Celo tokens by completing a certain task. 
 
 The task for our case is deposting another token(cUSD) in our smart contract and in return, a user will receieve an equivalent amount of Celo tokens in their wallet.
 
@@ -205,14 +205,13 @@ Next, create a function `swapToken` to let the user deposit cUSD tokens and rece
 
 
 >Notice:
-For this tutorial, you have used two tokens which have the same number of decimals. An amount in on token when converted to another token does not change. In real world applications, you will interact with different tokens that have different decimals.
+For this tutorial, you have used two tokens which have the same number of decimals. An amount in one token when converted to another token does not change. In real world applications, you will interact with different tokens that have different decimals.
 
-Inside the function, create a variable of type uint that and assign it the amount of tokens that the user has deposited. You will send the exact amount the user deposits, but in a diferent token.
+Inside the function, create a variable of type uint and assign it the amount of tokens that the user has deposited. You will send the exact amount the user deposits, but in a diferent token.
 
 Next, check that the smart contract has the amount that user has requested to deposit. 
 
-First, transfer the cUSd from the user's wallet to the smart contracr. Then transfer an equivalent amount od Celo tokens from the smart contract to the user's wallet address.
-
+First, transfer the cUSd from the user's wallet to the smart contract. Then transfer an equivalent amount od Celo tokens from the smart contract to the user's wallet address.
 
 If any of the transaction fails, the smart contract will display an error message.
 
@@ -234,12 +233,12 @@ contract Faucet{
     }
   }
 ```
-Create a function `contractTokenBalance`. It doesnt take in any parameter because it will only return the balance of smart contract. It is of type view. This means that the functioin will access and read friom the state and global variables. (Learn more on View and Pure functions) 
+Create a function `contractTokenBalance`. It doesnt take in any parameter because it will only return the balance of smart contract. It is of type view. This means that the function will access and read from the state and global variables. [Learn more on View and Pure functions]()
 
 The function returns two values `_celoBalance` and ` _cUSDBalance`, of type uint. 
 
 
-Inside the function, you will use the keyword `return` to return the Celo token balance and cUSD token balance of the smart contract. Using the ERC20 token interface and the address where it is stored, you call the balanceOf method. It takes in one parameter which is the address to use.
+Inside the function, you will use the keyword `return` to return the Celo token balance and cUSD token balance of the smart contract. Using the ERC20 token interface and the address of the token, you call the balanceOf method. It takes in one parameter which is the address to use.
 
 You access the address of the contract using the `address(this)` method because you want to return its balance.
 
@@ -257,7 +256,6 @@ In this section, you will you will create a Celo wallet and deploy your contract
 
 
   If you follow all the steps in the above guide, you should be able to deploy your contract on the Celo blockchain. 
-
 
 
 
@@ -290,7 +288,7 @@ To speed up the development process, you are going to use a boilerplate. It come
 git clone 
 ````
 
-2. navigate to the new repository
+2. Navigate to the new repository
 
 ```js
 cd 
@@ -307,7 +305,8 @@ npm install
 ```js
 npm run dev
 ````
-Your project should be up and running. Access it on htp://localhost: 3000 in your browser
+Your project should be up and running. Access it on htp://localhost:3000 in your browser
+
 
 ### 2.2 The HTML of the Dapp (time)
 
@@ -349,11 +348,85 @@ Start by declaring the document type, followed by the head element and meta tags
   <title>Faucet</title>
 
 </head>
-
 ```
 Import external stylesheets, one of which is bootstrap, a popular front-end library that allows you to create resaponsive websites with ease.(Learn more on bootstrap)[]
 
 And then, add a title.
+
+```html
+  <style type="text/css">
+    .overall{
+      background-color: rgb(183, 187, 188);
+      margin-top: 70px;
+      margin-left: 100px;
+    }
+
+    .first{
+      border-radius: 12px;
+      margin: .5rem;
+      padding: 1rem;
+      outline-offset: 0.5rem;
+      background-color: #D8D8D8;
+    }
+    .second{
+      border-radius: 12px;
+      margin: .5rem;
+      padding: 1rem;
+      outline-offset: 0.5rem;
+      background-color: #D8D8D8;
+
+    }
+
+    span{
+      font-size: 12px;
+    }
+
+    h4{
+      font-size: 20px;
+      font-weight: bold;
+    }
+    h3{
+      font-size: 15px;
+    }
+    .third{
+      border-radius: 12px;
+      margin: .5rem;
+      padding: 1rem;
+      outline-offset: 0.5rem;
+      background-color: #D8D8D8;
+    }
+
+    body{
+     background: rgb(183, 187, 188);
+    }
+
+    .navbar{
+      border-radius: 12px;
+      background-color: gold;
+    }
+
+    input{
+      border-radius: 8px;
+      border-color: burlywood;
+
+    }
+    .divSpace{
+      margin-top: 15px;
+    }
+
+    .fir{
+      border-radius: 10px;
+      border-color: burlywood;
+    }
+    .btn{
+      margin-top: 10px;
+      border-color: brown;
+      background-color: gold;
+    }
+  </style>
+
+```
+Add some CSS to add some design to the page.
 
 ```html 
 <body>
@@ -389,32 +462,31 @@ Add the main tag with the id faucet. We will render our content inside this tag.
 You will use flex box to display three div elements inside the main tag.
 
 ```html
- <div class="d-flex bg-success flex-row" style="height: 100vh">
-    <div class="d-flex flex-row">
-  <div class="p-2">
-    <h4>Get Test Tokens</h4>
-    <span>This faucet transfers TestToken on Alfajores testnet.</span><br>
-    <span>Confirm details before submitting.</span>
-     
-
-    <div>
-      <h5>Network</h5>
-      <span>Alfajores</span>
+ <div class="d-flex flex-row overall">
+  <div class="d-flex flex-row first">
+    <div class="p-2 fir">
+      <h4>Get Test Tokens</h4>
+      <div class="divSpace">
+        <span>This faucet transfers test tokens on Alfajores testnet.</span><br>
+        <span>Confirm details before submitting.</span>
+      </div>
+      <div class="divSpace">
+        <h4>Network</h4>
+        <span>Alfajores</span>
+      </div>
+      <div class="divSpace">
+        <h4>Wallet Address</h4>
+        <input type="text" name="test" id="toAddress">
+      </div>
+      <button class="btn" type="submit" id="requestTokenId">Submit</button>
     </div>
-    <div>
-      <h4>Wallet</h4>
-
-      <input type="text" name="test" id="tokenId">
-    </div>
-    <button type="submit" id="claimToken">Submit</button>
-  </div>
 ```
 
 The first div displays an interface to enable the user to request tokens from the dapp.
 
 ```html
- <div class="p-2">
-    <h4>Test balances</h4>
+<div class="p-2 second">
+    <h3>Token balance</h3>
     <table class="table table-fixed">
       <thead class="thead-dark">
         <tr>
@@ -429,6 +501,7 @@ The first div displays an interface to enable the user to request tokens from th
         </tr>
       </tbody>
     </table>
+
      Note: 
     <ol type="1" >
       <li class="list-group-item">After submitting, you will recieve 1 Celo token in your wallet.</li>
@@ -436,6 +509,7 @@ The first div displays an interface to enable the user to request tokens from th
        <li class="list-group-item">Donate excess Celo tokens to this address.<br>0xc94f1eaB4B3E9427Fa9aaF602dF7ED07217Ce73b</li>
     </ol>
   </div>
+</div>
 
 ```
 Inside the second div element, create a table element to display the token balances from the smart contract.
@@ -445,26 +519,25 @@ The last list item displays the address of the smart contract because you want a
 
 
 ```html
-<div class="p-2">
-    <h4>Swap Tokens</h4>
-    <span>Deposit cUSD to receive celo tokens</span><br>
-    <h5>cUSD => Celo</h5>
-    
-    <input type="number" name="swapAmount" id="swapAmount" placeholder="Enter amount of cUSD to deposit">
-    <button type="submit" id="swapToken">Swap</button>
-  </div>
+<div class="p-2 third">
+            <h4>Swap Tokens</h4>
+            <span>Deposit cUSD to receive Celo tokens</span><br>
+            <div class="divSpace">
+              <h5>cUSD <span>to</span> Celo</h5>
+              <input type="number" name="swapAmount" id="swapAmount" placeholder="Enter amount of cUSD to deposit">
+            </div>
+            <button class="btn" type="submit" id="swapToken">Swap</button>
+          </div>
 
-</div>
-</div>
-</main>
-</div>
-</body>
-</html>
+        </div>
+      </main>
+    </div>
 ```
 Create a div element to enable a user to swap cUSD tokens for Celo tokens.
 
 
 Here is how the dapp should like with only the HTML now.
+![Dapp front-end]()
 
 
 
@@ -504,11 +577,11 @@ You should also declare global variables for contractKit, contract and accounts 
 
 ```js
 const faucetContractAddress = "0x3d750214E24A89C9a0A2259421AE361dA1753D67"
-const cUSDContractAddress = "0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1"
+
 const celoCOntractAddress = "0xF194afDf50B03e69Bd7D057c1Aa9e10c9954E4C9"
 
 ````
-When you delpoy the contract, you will need its address in order to interact with it. Declare three variable; `faicetContractAddress` to hold the address of the contract, `cUSDContractAddress` to hold the address of the cUSD token, and finally `celoContractAddress` to hold the address of the celo token
+When you delpoy the contract, you will need its address in order to interact with it. Declare three variable; `faicetContractAddress` to hold the address of the contract and `celoContractAddress` to hold the address of the celo token
 
 
 #### 2.3.2 Connect to Celo Blockchain
@@ -570,6 +643,20 @@ In the next line, you get a readable cUSD balance. Use totalBalance.cUSD.to get 
 
 Display the cUSDBalance in the corresponding HTML element.
 
+#### 2.3.4 Approve Function
+
+```js
+
+
+async function celoApprove(_price) {
+        const cUSDContract = new kit.web3.eth.Contract(erc20Abi, celoCOntractAddress)
+
+        const result = await cUSDContract.methods
+          .approve(faucetContractAddress, _price)
+          .send({ from: kit.defaultAccount })
+        return result
+      }
+```
 
 ### 2.4 Event handlers
 In this section, you will learn to add event listeners and handle events.
@@ -629,9 +716,24 @@ Call the requestToken function.It takes in one parameter, the address of the wal
 If there is an error in the function execution, you will display a message to the user.
 
 
-### 2.4.3 Swap token function
-In this section, you will learn how to create a swap token function to allow a user to swap their cuSD tokens for Celo tokens.
+#### 2.4.3 Swap token function
+In this section, you will learn how to create a swap token function to allow a user to exchange their cuSD tokens for Celo tokens.
 
+```js
+const cUSDContractAddress = "0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1"
+
+async function cUSDApprove(_price) {
+        const cUSDContract = new kit.web3.eth.Contract(erc20Abi, cUSDContractAddress)
+
+        const result = await cUSDContract.methods
+          .approve(faucetContractAddress, _price)
+          .send({ from: kit.defaultAccount })
+        return result
+      }
+```
+ Create a variable `cUSDContractAddess` to hold the contract address of the cUSD token.
+
+ Next, create a copy of the celoApprove function and modify it to cater for cUSD.
 
 ```js
   document
@@ -658,8 +760,8 @@ In this section, you will learn how to create a swap token function to allow a u
     }
 
 ```
-When the user clicks on a button with the id swapToken, you get the value of the element with id swapAmount. This is the amount of cUSD the user wantd to swap.
-You convert the value to a big Number with 18 decimals using the BigNumber method.
+When the user clicks on a button with the id swapToken, you get the value of the element with id `swapAmount`. This is the amount of cUSD the user wants to swap.
+You convert the value to a Big Number with 18 decimals using the BigNumber method.
 
 Next, call the cUSDApprove function to allow the smart contract spend funds on behalf of the user.
 The function takes in one parameter, which is the amount the user wants to spend.
@@ -690,7 +792,7 @@ In this section, you will learn how to write a function to get the balance of th
   }
 ````
 
-Declare an async function `getContractBalance`. Inside the function, call the contractTokenBalance method on he smart contract. It reurns an object containig the Celo and cUSD token balance for the smart contract. 
+Declare an async function `getContractBalance`. Inside the function, call the contractTokenBalance method on the smart contract. It returns an object containing the Celo and cUSD token balance for the smart contract. 
 
 Next, update the tect ccontext of the elements with ids `celoBal` and `cUSDBal` with their values respectively. 
 
@@ -707,20 +809,21 @@ function notificationOff() {
 }
 
 ````
-Create a notification function that displays the alert element with the text as the parameter and a notificationOff function that stops showing the alert element.
+Create a `notification` function that displays the alert element with the text as the parameter and a `notificationOff` function that stops showing the alert element.
 
 
  ### 2.5 Host the dapp on github pages
 
- IN this section, you will learn how to host your completed project on github pages.
+ In this section, you will learn how to host your completed project on Github Pages.
 
 After testing that your dapp works correctly,
-it is time to build your dapp. Run this command in your terminal
 
+it is time to build your dapp. Run this command in your terminal
 ```js
 npm run build
 ```
-Upon completion, you will now have a new folder `docs` containing the an html and js file.
+
+Upon completion, you will now have a new folder `docs` containing an html and js file.
 
 - Upload your project to a new GitHub repository.
 - Once inside your repository, click on settings and scroll down to a section called GitHub Pages.
@@ -732,11 +835,10 @@ Congratulations, you have made it to the end. You now have a fully functional da
 
 code for the full dapp.
 
-Conclusion
+## Conclusion
 
 In this tutorial, you have learnt how to build a full stack faucet dapp running on Celo blockchain, and deploying it to github pages. With the knowledge gained, you can now aply it to build more fully functional dapps.
 
 
 
 
-# Celo-Faucet

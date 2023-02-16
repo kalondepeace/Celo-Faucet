@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css"
+    />
+     <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  />
+  <title>Faucet</title>
+  <style type="text/css">
+    .overall{
+      background-color: rgb(183, 187, 188);
+      margin-top: 70px;
+      margin-left: 100px;
+    }
+
+    .first,{
+      border-radius: 12px;
+      margin: .5rem;
+      padding: 1rem;
+      outline-offset: 0.5rem;
+      background-color: #D8D8D8;
+    }
+    .second{
+        border-radius: 12px;
+      margin: .5rem;
+      padding: 1rem;
+      outline-offset: 0.5rem;
+      background-color: #D8D8D8;
+
+    }
+
+    span{
+      font-size: 12px;
+    }
+
+    h4{
+      font-size: 20px;
+      font-weight: bold;
+    }
+    h3{
+      font-size: 15px;
+    }
+    .third{
+      border-radius: 12px;
+      margin: .5rem;
+      padding: 1rem;
+      outline-offset: 0.5rem;
+      background-color: #D8D8D8;
+
+    }
+    body{
+     background: rgb(183, 187, 188);
+    }
+
+    .navbar{
+      border-radius: 12px;
+      background-color: gold;
+    }
+
+    input{
+      border-radius: 8px;
+      border-color: burlywood;
+
+    }
+    .divSpace{
+      margin-top: 15px;
+    }
+
+    .fir{
+      border-radius: 10px;
+      border-color: burlywood;
+    }
+    .btn{
+      margin-top: 10px;
+      border-color: brown;
+      background-color: gold;
+    }
+  </style>
+
+</head>
+
+  <body>
+    <div class="container-fluid" >
+      <nav class="navbar navbar-light">
+            <div class="container-fluid">
+              <span class="navbar-brand m-0 h4 fw-bold">Faucet</span>
+              <span class="nav-link border rounded-pill bg-light">
+                <span id="balance">0</span>
+                cUSD
+              </span>
+            </div>
+          </nav>
+
+        <div class="alert alert-warning sticky-top mt-2" role="alert">
+         <span id="notification">⌛ Loading...</span>
+      </div>
+
+
+      <main id="marketplace" class="row">
+        
+        <div class="d-flex flex-row overall">
+          <div class="d-flex flex-row first">
+            <div class="p-2 fir">
+              <h4>Get Test Tokens</h4>
+              <div class="divSpace">
+                <span>This faucet transfers test tokens on Alfajores testnet.</span><br>
+                <span>Confirm details before submitting.</span>
+              </div>
+              <div class="divSpace">
+                <h4>Network</h4>
+                <span>Alfajores</span>
+              </div>
+              <div class="divSpace">
+                <h4>Wallet Address</h4>
+                <input type="text" name="test" id="toAddress">
+              </div>
+              <button class="btn" type="submit" id="requestTokenId">Submit</button>
+            </div>
+
+            <div class="p-2 second">
+              <h3>Token balance</h3>
+              <table class="table table-fixed">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">Celo</th>
+                    <th scope="col">cUSD</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td id="celoBal">loading...</td>
+                    <td id="cUSDBal">loading...</td>
+                  </tr>
+                </tbody>
+              </table>
+
+               Note: 
+              <ol type="1" >
+                <li class="list-group-item">After submitting, you will recieve 1 Celo token in your wallet.</li>
+                <li class="list-group-item">You can only claim the test tokens once in 24 hours</li>
+                 <li class="list-group-item">Donate excess Celo tokens to this address.<br>0xc94f1eaB4B3E9427Fa9aaF602dF7ED07217Ce73b</li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="p-2 third">
+            <h4>Swap Tokens</h4>
+            <span>Deposit cUSD to receive Celo tokens</span><br>
+            <div class="divSpace">
+              <h5>cUSD <span>to</span> Celo</h5>
+              <input type="number" name="swapAmount" id="swapAmount" placeholder="Enter amount of cUSD to deposit">
+            </div>
+            <button class="btn" type="submit" id="swapToken">Swap</button>
+          </div>
+
+        </div>
+      </main>
+    </div>
+    
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+   <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+    crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/ethereum-blockies@0.1.1/blockies.min.js"></script>
+  </body>
+</html>
