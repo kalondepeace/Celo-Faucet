@@ -1,6 +1,6 @@
 
 
-### Build A Token Faucet on the Celo Blockchain
+# Build A Token Faucet on the Celo Blockchain
 
 In this tutorial, you will learn how to build dapp wih Solidity language and deploy it on the Celo blockchain
 
@@ -9,10 +9,10 @@ In this tutorial, you will learn how to build dapp wih Solidity language and dep
 
 You will need to have familiarity of the following:
 
-- Prior knowledge of javascript
+- Prior knowledge of [javascript](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/JavaScript_basics#:~:text=JavaScript%20is%20a%20programming%20language,styling%3B%20with%20animation%2C%20etc.)
 - Familiarity with the command line
-- Prior knowledge of (blockchain)[].
-- Have some knowledge on (Solidity)[].
+- Prior knowledge of [blockchain](http://www.blockchain-basics.com/).
+- Have some knowledge on [Solidity](https://soliditylang.org/).
 
 
 ## Requirements
@@ -20,7 +20,7 @@ You will need to have familiarity of the following:
 - A code editor or text editor. **[VSCode](https://code.visualstudio.com/download)** is recommended
 - A terminal. **[Git Bash](https://git-scm.com/downloads)** is recommended
 - An Internet Browser and good internet connection
-- **[Remix](https://remix.ethereum.org)**
+- **[Remix IDE](https://remix.ethereum.org)**
 - **[Celo Extension Wallet](https://chrome.google.com/webstore/detail/celoextensionwallet/kkilomkmpmkbdnfelcpgckmpcaemjcdh?hl=en)**.
 
 
@@ -29,13 +29,13 @@ You will need to have familiarity of the following:
 In this chapter, you will learn how to write a smart contract in the popular smart contract language Solidity and deploy it to the Celo blockchain.
 
 
-## Learning Objective
+#### Learning Objective
 
-* Learn how to write smart contracts in Solidity with the Remix IDE.
-* Write a smart contract for a marketplace.
-* Deploy your smart contract to the Celo blockchain.
+- [x] Learn how to write smart contracts in Solidity with the Remix IDE.
+- [xWrite a smart contract for a token faucet.
+- [x] Deploy your smart contract to the Celo blockchain.
 
-In this tutorial, you will build the following smart contract: (Faucet.sol)[]
+In this tutorial, you will build the following smart contract: [Faucet.sol](./contract/faucet.sol)
 
 
 ### 1.1  Remix IDE.
@@ -47,7 +47,7 @@ Remix IDE is notable for its integration with the Ethereum Virtual Machine (EVM)
 
 ### 1.2  Solidity File Setup
 
-Open (Remix IDE)[] in your browser and
+Open [Remix IDE](https://remix.ethereum.org/) in your browser and
 create a solidity file and name it faucet.sol
 
 Once the file is created, its time to start developing our smart contract.
@@ -58,9 +58,9 @@ Once the file is created, its time to start developing our smart contract.
 pragma solidity >=0.7.0 <0.9.0;
 ```
 
-In the first line, you specify the license the contract uses. Here is a comprehensive list of the available licenses https://spdx.org/licenses/.
+In the first line, you specify the license the contract uses. Here is a comprehensive list of the available [licenses](https://spdx.org/licenses/.)
 
-Using the pragma keyword, you specify the solidity version that you want the compiler to use. In this case, it should be higher than or seven and lower than nine. It is important to specify the version of the compiler because solidity changes constantly. If you want to execute older code without breaking it, you can do that by using an older compiler version.
+Using the `pragma` keyword, you specify the solidity version that you want the compiler to use. In this case, it should be higher than or seven and lower than nine. It is important to specify the version of the compiler because solidity changes constantly. If you want to execute older code without breaking it, you can do that by using an older compiler version.
 
 
 ```solidity
@@ -93,20 +93,20 @@ interface IERC20Token {
 }
 
 ```
-Now we have a way on how to interact with out tokens.
+Now we have a way on how to interact with our tokens.
 
 
 ```solidity
-	 address internal celoTokenAddress = 0xF194afDf50B03e69Bd7D057c1Aa9e10c9954E4C9;
+   address internal celoTokenAddress = 0xF194afDf50B03e69Bd7D057c1Aa9e10c9954E4C9;
 
-    uint ERC20_DECIMALS = 18;
+   uint ERC20_DECIMALS = 18;
 ```
 
-Declare a variable `celoTokenAddress`, first, by specifying its type(address). Then you can specify the visibilty of the variable using the keyword  internal, because you want the variable to only be accessed inside the contract. Learn more on visibility
+Create a variable `celoTokenAddress`. first, by specifying its type(address). Then you can specify its visibilty using the keyword  internal, because you want the variable to only be accessed inside the contract. [Learn more on visibility](https://docs.soliditylang.org/en/v0.8.18/contracts.html#visibility-and-getters)
 
 Assign it the contract address of the token(Celo), that we will be using in this tutorial.
 
-You declare a variable `ERC20_DECIMALS`, its of type uint. Assign it the number 18, which is the number of decimals the Celo token has. (learn more on token decimals)[]
+You declare a variable `ERC20_DECIMALS`, its of type uint. Assign it the number 18, which is the number of decimals the Celo token has. [learn more on token decimals](https://docs.openzeppelin.com/contracts/3.x/erc20)
 
 
 
@@ -138,7 +138,7 @@ contract Faucet{
 
 }
 ```
-To track the last time the user requested for tokens, create a variable `lastRequest`. It is of type mapping. Mapping allows you to store key: value pairs. the key will be the address of the user, and the value will be the last time they requested the tokens. (learn more on mapping)[]
+To track the last time the user requested for tokens, create a variable `lastRequest`. It is of type mapping. Mapping allows you to store key: value pairs. the key will be the address of the user, and the value will be the last time they requested the tokens. [learn more on mapping](https://docs.soliditylang.org/en/v0.8.18/types.html#)
 
 You also declare a variable `requestAmount`, of type uint. Assign it the amount of tokens the user will recieve, in our case 1 Celo.
 
@@ -150,16 +150,14 @@ You also define the visibility of the function as `public`.
 
 Inside the function, first check the last time the user requested for the tokens. It should be more than 24 hours from the current time. 
 
-You make sure this condition is always met before sending th tokens, by using the keyword `require`. If the condition inside the require keyword fails, the whole function will stop executing. [Learn more about require]()
+You make sure this condition is always met before sending th tokens, by using the keyword `require`. If the condition inside the require keyword fails, the whole function will stop executing. [Learn more about require](https://docs.soliditylang.org/en/v0.8.18/control-structures.html#error-handling-assert-require-revert-and-exceptions)
 
 
 Next, you check to make sure the smart contract has enough Celo tokens to send to the user. 
 
 Now that all the above conditions, you go ahead and transfer the amount of tokens requested from the contract to the user's address.
 
-Lastly, you update the last time that the user requested the tokens. Assign it the `block.timestamp`, which references the time when the function was executed. block.timestamp is a global variable. (Learn more about global variables)
-
-code for this section.
+Lastly, you update the last time that the user requested the tokens. Assign it the `block.timestamp`, which references the time when the function was executed. block.timestamp is a global variable. [Learn more about global variables](https://docs.soliditylang.org/en/v0.8.17/units-and-global-variables.html)
 
 
 ### 1.5 Swap Token Function
@@ -216,8 +214,6 @@ First, transfer the cUSd from the user's wallet to the smart contract. Then tran
 If any of the transaction fails, the smart contract will display an error message.
 
 
-code for this section
-
 ### 1.6 Get balance Function
 
 In this section, you will write a function to show the user the amount of tokens stored in the smart contract
@@ -233,7 +229,7 @@ contract Faucet{
     }
   }
 ```
-Create a function `contractTokenBalance`. It doesnt take in any parameter because it will only return the balance of smart contract. It is of type view. This means that the function will access and read from the state and global variables. [Learn more on View and Pure functions]()
+Create a function `contractTokenBalance`. It doesnt take in any parameter because it will only return the balance of smart contract. It is of type view. This means that the function will access and read from the state and global variables. [Learn more on View and Pure functions](https://solidity-by-example.org/view-and-pure-functions/)
 
 The function returns two values `_celoBalance` and ` _cUSDBalance`, of type uint. 
 
@@ -244,8 +240,6 @@ You access the address of the contract using the `address(this)` method because 
 
 You check for the balance of two tokens stored in the smart contract.
 
-
-code for this section.
 
 
 ### 1.7 Deploy the Smart Contract on the Celo blockchain.
@@ -266,16 +260,16 @@ In this section, you will you will create a Celo wallet and deploy your contract
 
   ### Learning objective
 
-[x] Learn how to write the HTML and JS part of your DApp.
-[x Connect your DApp to your smart contract on the Celo blockchain with the library ContractKit.
-[x] Learn how to request tokens from the smart contract
-[x] Learn how to swap a token for another.
+- [x] Learn how to write the HTML and JS part of your DApp.
+- [x] Connect your DApp to your smart contract on the Celo blockchain with the library ContractKit.
+- [x] Learn how to request tokens from the smart contract
+- [x] Learn how to swap a token for another.
 
 
 (time)
 
 At the end of this chapter, you should have something similar to this. (User Interface for the faucet dapp).
-![User interface](./front.png)
+![User interface](./real.png)
 
 
 ### 2.1 Initializing your project.(time)
@@ -349,7 +343,7 @@ Start by declaring the document type, followed by the head element and meta tags
 
 </head>
 ```
-Import external stylesheets, one of which is bootstrap, a popular front-end library that allows you to create resaponsive websites with ease.(Learn more on bootstrap)[]
+Import external stylesheets, one of which is bootstrap, a popular front-end library that allows you to create resaponsive websites with ease.[Learn more on bootstrap](https://getbootstrap.com/)
 
 And then, add a title.
 
