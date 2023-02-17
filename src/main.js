@@ -99,6 +99,8 @@ window.addEventListener('load', async () => {
     }catch(error){
     	notification("Request failed")
     }
+    await getBalance()
+    await getContractBalance()
 
 
   })
@@ -109,7 +111,7 @@ window.addEventListener('load', async () => {
   .querySelector("#swapToken")
   .addEventListener("click", async (e) => {
     
-    console.log("Awaiting swap approval of the token, Please wait")
+    notification("Awaiting swap approval of the token, Please wait")
     const tokenAmount = BigNumber(document.getElementById("swapAmount").value)
     					.shiftedBy(ERC20_DECIMALS)
                         .toString()
@@ -122,11 +124,13 @@ window.addEventListener('load', async () => {
     		.swapToken(tokenAmount)
     		 .send({from: kit.defaultAccount})
 
-    		 console.log("swap successful")
+    		 notification("swap successful")
 
     }catch(error){
     	console.log(error)
     }
+    await getBalance()
+    await getContractBalance()
 
   })
 

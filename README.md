@@ -1,10 +1,40 @@
 
 
 # Beginner's guide to building a Token Faucet dapp on the Celo blockchain.
-
+## Introduction
 Building a token faucet on the Celo blockchain can be an exciting project for developers interested in exploring decentralized finance (DeFi) and blockchain technology. Token faucets are a popular tool in the world of blockchain, as they allow users to obtain a small amount of a particular cryptocurrency for free. This can be useful for testing purposes, user adoption, or community engagement. 
 
 With the Celo blockchain's focus on accessibility and financial inclusion, building a token faucet on this platform can help to provide users with easy access to digital assets and drive the adoption of the Celo ecosystem. In this guide, we will explore the steps involved in building a token faucet on the Celo blockchain, including the necessary tools, resources, and best practices to create a functional and secure faucet and deploy it on the Celo blockchain
+
+### Table Of Contents
+- [Introduction](#introduction)
+- [Pre-requisites](#prerequisites).
+- [requirements](#prerequisites).
+- [Smart contract development](#smart-contract-development).
+  * [Learning objective](#learning-objective)
+  * [Remix IDE](#11--remix-ide).
+  * [Solidity File Setup](#12--solidity-file-setup).
+  *[ERC20 interface](#13-erc20-interface).
+  * [Request Token](#14-request-token-function).
+  * [Swap Token](#15-swap-token-function).
+  * [Get balance](#16-get-balance-function)
+  * [Deploy smart contract](#17-deploy-the-smart-contract-on-the-celo-blockchain).
+- [Frontend Development](#front-end-development)
+    * [Initializing](#21-initializing-your-project)
+    * [The HTML of the dapp](#22-the-html-of-the-dapp-3-minutes)
+    * [The JS of the dapp](#23-the-js-of-your-dapp8-minutes)
+    * [Interact with the smart contract](#231-interact-with-the-smart-contract)
+    * [Connect to Celo blockchain](#232-connect-to-celo-blockchain)
+    * [Read user's balance](#233-read-the-users-cusd-token-balance)
+    * [Approve function](#234-approve-function)
+    * [Event handlers](#24-event-handlers)
+    * [window loading for the first time](#241--window-loading-for-the-first-time)
+    * [Request tokens from your contract](#242-request-tokens-from-your-contracttime)
+    * [Swap token function](#243-swap-token-function)
+    * [Contract token balance](#244-contract-token-balance-function)
+ - [Host the dapp](#25-host-the-dapp-on-github-pages)
+ - [Conclusion](#conclusion)
+ - [Author](#author)
 
 
 ## Prerequisites
@@ -278,25 +308,25 @@ To speed up the development process, you are going to use a boilerplate. It come
 
 1 Open your terminal and clone the boilerplate from the repository
 
-```js
-git clone 
+```bash
+git clone https://github.com/kalondepeace/faucet-boilerplate-template.git
 ````
 
 2. Navigate to the new repository
 
-```js
-cd 
+```bash
+cd faucet-boilerplate-template
 ````
 
 3. Now, install all dependencies
 
-```js
+```bash
 npm install
 ````
 
 4. Start a local development server
 
-```js
+```bash
 npm run dev
 ````
 Your project should be up and running. Access it on htp://localhost:3000 in your browser
@@ -787,7 +817,7 @@ In this section, you will learn how to write a function to get the balance of th
 
 Declare an async function `getContractBalance`. Inside the function, call the contractTokenBalance method on the smart contract. It returns an object containing the Celo and cUSD token balance for the smart contract. 
 
-Next, update the tect ccontext of the elements with ids `celoBal` and `cUSDBal` with their values respectively. 
+Next, update the text context of the elements with ids `celoBal` and `cUSDBal` with their values respectively. 
 
 In case of an error, display an error message to the user.
 
@@ -802,35 +832,29 @@ function notificationOff() {
 }
 
 ````
-Create a `notification` function that displays the alert element with the text as the parameter and a `notificationOff` function that stops showing the alert element.
+Create a `notification` function that displays the alert. It takes in text as the parameter and a `notificationOff` function that stops showing the alert message.
 
 
- ### 2.5 Host the dapp on github pages
+ ### 2.5 Host the dapp on Github Pages
 
  In this section, you will learn how to host your completed project on Github Pages.
 
-After testing that your dapp works correctly,
+After testing that your dapp works correctly, it is time to build your dapp. Run this command in your terminal
 
-it is time to build your dapp. Run this command in your terminal
-```js
+```bash
 npm run build
 ```
 
-Upon completion, you will now have a new folder `docs` containing an html and js file.
+Upon completion, you will now have a new folder `docs` containing an `index.html` and `main.js` file.
 
 - Upload your project to a new GitHub repository.
 - Once inside your repository, click on settings and scroll down to a section called GitHub Pages.
 - Select the master branch and the docs folder as the source for your GitHub pages.
 
-
 Congratulations, you have made it to the end. You now have a fully functional dapp running on the Celo blockchain.
 
-
-code for the full dapp.
-
 ## Conclusion
-
-In this tutorial, you have learnt how to build a full stack faucet dapp running on Celo blockchain, and deploying it to github pages. With the knowledge gained, you can now aply it to build more fully functional dapps.
+In this tutorial, you have learnt how to build a full stack faucet dapp running on Celo blockchain, and deploying it to Github Pages. With the knowledge gained, you can now apply it to build more fully functional dapps.
 
 ## Author
 
