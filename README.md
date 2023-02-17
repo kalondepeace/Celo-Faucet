@@ -2,12 +2,14 @@
 
 # Beginner's guide to building a Token Faucet dapp on the Celo blockchain.
 
-In this tutorial, you will learn how to build dapp wih Solidity language and deploy it on the Celo blockchain
+Building a token faucet on the Celo blockchain can be an exciting project for developers interested in exploring decentralized finance (DeFi) and blockchain technology. Token faucets are a popular tool in the world of blockchain, as they allow users to obtain a small amount of a particular cryptocurrency for free. This can be useful for testing purposes, user adoption, or community engagement. 
+
+With the Celo blockchain's focus on accessibility and financial inclusion, building a token faucet on this platform can help to provide users with easy access to digital assets and drive the adoption of the Celo ecosystem. In this guide, we will explore the steps involved in building a token faucet on the Celo blockchain, including the necessary tools, resources, and best practices to create a functional and secure faucet and deploy it on the Celo blockchain
 
 
 ## Prerequisites
 
-You will need to have familiarity of the following:
+You need to be familiar with the following:
 
 - Prior knowledge of [javascript](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/JavaScript_basics#:~:text=JavaScript%20is%20a%20programming%20language,styling%3B%20with%20animation%2C%20etc.)
 - Familiarity with the command line
@@ -267,7 +269,7 @@ In this section, you will you will create a Celo wallet and deploy your contract
 (13 minutes)
 
 At the end of this chapter, you should have something similar to this. (User Interface for the faucet dapp).
-![User interface](./real.png)
+![User interface](./first.png)
 
 
 ### 2.1 Initializing your project.
@@ -529,17 +531,16 @@ Create a div element to enable a user to swap cUSD tokens for Celo tokens.
 
 
 Here is how the dapp should like with only the HTML now.
-![Dapp front-end]()
+![Dapp interface](./real.png)
 
 
 
-
-### 2.3 The JS of your dapp(time)
+### 2.3 The JS of your dapp(8 minutes)
 
 In this section of the tutorial, you will add the basic functionality of your DApp. You will create a functioning dapp in vanilla Javascript with sample products that is not yet connected to the Celo blockchain.
 
 
-#### 2.3.1 Interact with the smart contract.(time)
+#### 2.3.1 Interact with the smart contract
 
 In this section of the tutorial, you are going to use the contractKit library to interact with the Celo Blockchain. ContractKit includes web3.js, a very popular collection of libraries also used for ethereum, that allows you to get access to a web3 object and interact with node's JSON RPC API (Learn more about contractKit).
 
@@ -629,7 +630,7 @@ const getBalance = async function () {
   document.querySelector("#balance").textContent = cUSDBalance
 }
 ````
-Create an asynchronous function `getBalance`. With kit’s method kit.getTotalBalance, you can get the total balance of an account. In this case, you want the balance from the account that interacts with the CeloExtensionWallet — the one you stored in kit.defaultAccount.
+Create an asynchronous function `getBalance`. With kit’s method kit.getTotalBalance, you can get the total balance of an account. In this case, you want the balance from the account that interacts with the CeloExtensionWallet, the one you stored in kit.defaultAccount.
 
 In the next line, you get a readable cUSD balance. Use totalBalance.cUSD.to get the cUSD balance. Since it’s a big number, convert it to be readable by shifting the comma 18 places to the left and use toFixed(2) to display only two decimal places after the decimal point.
 
@@ -701,7 +702,7 @@ In this section of the tutorial, you will connect to your smart contract, as wel
 ````
 When the user clicks on a button with the id `requestToken`, you get the value of the element with the id `toAddress`. This will be the address that wants to receive the test tokens.
 
-  Notify the user of what is happening.
+Notify the user of what is happening.
 
 Call the requestToken function.It takes in one parameter, the address of the wallet to receive the tokens.
 
@@ -831,6 +832,8 @@ code for the full dapp.
 
 In this tutorial, you have learnt how to build a full stack faucet dapp running on Celo blockchain, and deploying it to github pages. With the knowledge gained, you can now aply it to build more fully functional dapps.
 
+## Author
 
+Peace is a computer engineering student. She is passionate about new and trending technologies.
 
 
