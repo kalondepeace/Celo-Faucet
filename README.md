@@ -858,6 +858,6 @@ In this tutorial, you have learnt how to build a full stack faucet dapp running 
 
 ## Author
 
-Peace is a computer engineering student. She is passionate about new and trending technologies.
+Peace is a Computer Engineering Student. She is passionate about new and trending technologies.
 
 
