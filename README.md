@@ -1,6 +1,6 @@
 
 
-# Build A Token Faucet on the Celo Blockchain
+# Beginner's guide to building a Token Faucet dapp on the Celo blockchain.
 
 In this tutorial, you will learn how to build dapp wih Solidity language and deploy it on the Celo blockchain
 
@@ -11,14 +11,14 @@ You will need to have familiarity of the following:
 
 - Prior knowledge of [javascript](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/JavaScript_basics#:~:text=JavaScript%20is%20a%20programming%20language,styling%3B%20with%20animation%2C%20etc.)
 - Familiarity with the command line
-- Prior knowledge of [blockchain](http://www.blockchain-basics.com/).
-- Have some knowledge on [Solidity](https://soliditylang.org/).
+- Prior knowledge on [blockchain](http://www.blockchain-basics.com/).
+- Prior knowledge on [Solidity](https://soliditylang.org/).
 
 
 ## Requirements
 - **[NodeJS](https://nodejs.org/en/download)** from V12.or higher
-- A code editor or text editor. **[VSCode](https://code.visualstudio.com/download)** is recommended
-- A terminal. **[Git Bash](https://git-scm.com/downloads)** is recommended
+- A code editor or text editor. [VSCode](https://code.visualstudio.com/download) or [Sublime Text](https://www.sublimetext.com/).
+- Terminal or command line
 - An Internet Browser and good internet connection
 - **[Remix IDE](https://remix.ethereum.org)**
 - **[Celo Extension Wallet](https://chrome.google.com/webstore/detail/celoextensionwallet/kkilomkmpmkbdnfelcpgckmpcaemjcdh?hl=en)**.
@@ -32,7 +32,7 @@ In this chapter, you will learn how to write a smart contract in the popular sma
 #### Learning Objective
 
 - [x] Learn how to write smart contracts in Solidity with the Remix IDE.
-- [xWrite a smart contract for a token faucet.
+- [x] Write a smart contract for a token faucet.
 - [x] Deploy your smart contract to the Celo blockchain.
 
 In this tutorial, you will build the following smart contract: [Faucet.sol](./contract/faucet.sol)
@@ -48,7 +48,7 @@ Remix IDE is notable for its integration with the Ethereum Virtual Machine (EVM)
 ### 1.2  Solidity File Setup
 
 Open [Remix IDE](https://remix.ethereum.org/) in your browser and
-create a solidity file and name it faucet.sol
+create a solidity file and name it `faucet.sol`
 
 Once the file is created, its time to start developing our smart contract.
 
@@ -72,7 +72,7 @@ You define your contract with the keyword `contract` and give it a name.
 
 
 ### 1.3 ERC20 interface
-In this tutorial, since you are going to be dealing with token transfers, you need an interface to interact with the tokens and perform actinos lke transferring tokens.
+In this tutorial, since you are going to be dealing with token transfers, you need an interface to interact with the tokens and perform actions lke transferring tokens.
 
 IERC20 is an interface for the standard implementation of a fungible token on the Ethereum blockchain. The acronym stands for "Ethereum Request for Comment 20", and it is a technical standard used to create and interact with tokens that have the same characteristics as the Ethereum cryptocurrency, Ether.
 
@@ -120,12 +120,11 @@ Users will only be able to request tokens once per 24 hours.
 ```solidity
 
 contract Faucet{
-
-	mapping (address => uint) public lastRequest;
+  mapping (address => uint) public lastRequest;
 
   uint requestAmount = 10 ** ERC_DECIMALS;
 
-   function requestTokens(address _to) public{
+  function requestTokens(address _to) public{
 
     require((lastRequest[msg.sender] + 1 days) < block.timestamp,"You only claim once in 24 hours");
 
@@ -135,10 +134,9 @@ contract Faucet{
 
     lastRequest[msg.sender] = block.timestamp;
   }
-
 }
 ```
-To track the last time the user requested for tokens, create a variable `lastRequest`. It is of type mapping. Mapping allows you to store key: value pairs. the key will be the address of the user, and the value will be the last time they requested the tokens. [learn more on mapping](https://docs.soliditylang.org/en/v0.8.18/types.html#)
+To track the last time the user requested for tokens, create a variable `lastRequest`. It is of type mapping. Mapping allows you to store key-value pairs. the key will be the address of the user, and the value will be the last time they requested the tokens. [learn more on mapping](https://docs.soliditylang.org/en/v0.8.18/types.html#)
 
 You also declare a variable `requestAmount`, of type uint. Assign it the amount of tokens the user will recieve, in our case 1 Celo.
 
@@ -150,19 +148,19 @@ You also define the visibility of the function as `public`.
 
 Inside the function, first check the last time the user requested for the tokens. It should be more than 24 hours from the current time. 
 
-You make sure this condition is always met before sending th tokens, by using the keyword `require`. If the condition inside the require keyword fails, the whole function will stop executing. [Learn more about require](https://docs.soliditylang.org/en/v0.8.18/control-structures.html#error-handling-assert-require-revert-and-exceptions)
+You make sure this condition is always met before sending the tokens, by using the keyword `require`. If the condition inside the require method fails, the whole function will stop executing. [Learn more about require](https://docs.soliditylang.org/en/v0.8.18/control-structures.html#error-handling-assert-require-revert-and-exceptions)
 
 
 Next, you check to make sure the smart contract has enough Celo tokens to send to the user. 
 
-Now that all the above conditions, you go ahead and transfer the amount of tokens requested from the contract to the user's address.
+If all the above conditions are met, you go ahead and transfer the amount of tokens requested from the contract to the user's address.
 
 Lastly, you update the last time that the user requested the tokens. Assign it the `block.timestamp`, which references the time when the function was executed. block.timestamp is a global variable. [Learn more about global variables](https://docs.soliditylang.org/en/v0.8.17/units-and-global-variables.html)
 
 
 ### 1.5 Swap Token Function
 
-What shuold happens if a user needs more tokens when the 24 hour gap has not elapsed?. In this section, you will enable the user to receive Celo tokens by completing a certain task. 
+What should happens if a user needs more tokens when the 24 hour gap has not elapsed?. In this section, you will enable the user to receive Celo tokens by completing a certain task. 
 
 The task for our case is deposting another token(cUSD) in our smart contract and in return, a user will receieve an equivalent amount of Celo tokens in their wallet.
 
@@ -203,7 +201,7 @@ Next, create a function `swapToken` to let the user deposit cUSD tokens and rece
 
 
 >Notice:
-For this tutorial, you have used two tokens which have the same number of decimals. An amount in one token when converted to another token does not change. In real world applications, you will interact with different tokens that have different decimals.
+For this tutorial, you have used two tokens which have the same number of decimals. An amount in one token when converted to another token does not change. In real world applications, you may interact with tokens that have different decimals.
 
 Inside the function, create a variable of type uint and assign it the amount of tokens that the user has deposited. You will send the exact amount the user deposits, but in a diferent token.
 
@@ -266,13 +264,13 @@ In this section, you will you will create a Celo wallet and deploy your contract
 - [x] Learn how to swap a token for another.
 
 
-(time)
+(13 minutes)
 
 At the end of this chapter, you should have something similar to this. (User Interface for the faucet dapp).
 ![User interface](./real.png)
 
 
-### 2.1 Initializing your project.(time)
+### 2.1 Initializing your project.
 
 To speed up the development process, you are going to use a boilerplate. It comes with the necessary libraries and packages required for our dapp.
 
@@ -302,7 +300,7 @@ npm run dev
 Your project should be up and running. Access it on htp://localhost:3000 in your browser
 
 
-### 2.2 The HTML of the Dapp (time)
+### 2.2 The HTML of the Dapp (3 minutes)
 
 In this section, you will start with basics of your Dapp, the HTML
 
@@ -560,7 +558,7 @@ let kit
 let contract
 let accounts
 ````
-
+In the `main.js `file inside the `src` folder
 Import the newKitFromWeb3, Web3, and BigNumber objects from their respective libraries.
 
 Many Celo operations operate on numbers that are outside the range of values used in Javascript. In this case we will use bignumber.js because it can handle these numbers.
