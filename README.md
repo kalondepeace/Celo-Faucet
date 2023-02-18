@@ -2,7 +2,7 @@
 
 # Beginner's guide to building a Token Faucet Dapp on the Celo blockchain
 
-* Estimated Reading Time: 18 minutes*
+_Estimated Reading Time: **18 minutes**_
 
 ## Introduction
 Building a token faucet on the Celo blockchain can be an exciting project for developers interested in exploring decentralized finance (DeFi) and blockchain technology. Token faucets are a popular tool in the world of blockchain, as they allow users to obtain a small amount of a particular cryptocurrency for free. This can be useful for testing purposes, user adoption, or community engagement. 
@@ -32,7 +32,7 @@ With the Celo blockchain's focus on accessibility and financial inclusion, build
     * [Approve function](#234-approve-function)
     * [Event handlers](#24-event-handlers)
     * [Window loading for the first time](#241--window-loading-for-the-first-time)
-    * [Request tokens from your contract](#242-request-tokens-from-your-contracttime)
+    * [Request tokens from your contract](#242-request-tokens-from-your-contract)
     * [Swap token function](#243-swap-token-function)
     * [Contract token balance](#244-contract-token-balance-function)
  - [Host the dapp](#25-host-the-dapp-on-github-pages)
@@ -72,7 +72,7 @@ In this chapter, you will learn how to write a smart contract in the popular sma
 In this tutorial, you will build the following smart contract: [Faucet.sol](./contract/faucet.sol)
 
 
-### 1.1  Remix IDE.
+### 1.1  Remix IDE
 
 Remix IDE is an open-source integrated development environment designed for writing, testing, and deploying smart contracts on the Ethereum blockchain. It provides a web-based interface that allows developers to write and compile Solidity smart contracts in their web browser, complete with features such as syntax highlighting, auto-completion, and code debugging. It also includes a built-in compiler that can compile Solidity code and generate bytecode for deployment on the Ethereum network.
 
