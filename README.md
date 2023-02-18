@@ -275,8 +275,7 @@ You check for the balance of two tokens stored in the smart contract.
 ### 1.7 Deploy the Smart Contract on the Celo blockchain.
 
 In this section, you will you will create a Celo wallet and deploy your contract to the Celo testnet alfajores.
-  
-  I have created a separate guide on how to delpoy the smart contract on Celo blockchain. Check it out here.
+  A tutorial on how to deploy on the CELO blockchain can be found [here](https://docs.celo.org/developer/deploy/remix).
 
 
   If you follow all the steps in the above guide, you should be able to deploy your contract on the Celo blockchain. 
@@ -859,5 +858,6 @@ In this tutorial, you have learnt how to build a full stack faucet dapp running 
 ## Author
 
 Peace is a Computer Engineering Student. She is passionate about new and trending technologies.
+For contributions,feel free to check my [github](https://github.com/kalondepeace) account.
 
 
