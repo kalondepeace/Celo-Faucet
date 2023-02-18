@@ -1,22 +1,25 @@
 
 
-# Beginner's guide to building a Token Faucet dapp on the Celo blockchain.
+# Beginner's guide to building a Token Faucet Dapp on the Celo blockchain
+
+_Estimated Reading Time: **18 minutes**_
+
 ## Introduction
 Building a token faucet on the Celo blockchain can be an exciting project for developers interested in exploring decentralized finance (DeFi) and blockchain technology. Token faucets are a popular tool in the world of blockchain, as they allow users to obtain a small amount of a particular cryptocurrency for free. This can be useful for testing purposes, user adoption, or community engagement. 
 
 With the Celo blockchain's focus on accessibility and financial inclusion, building a token faucet on this platform can help to provide users with easy access to digital assets and drive the adoption of the Celo ecosystem. In this guide, we will explore the steps involved in building a token faucet on the Celo blockchain, including the necessary tools, resources, and best practices to create a functional and secure faucet and deploy it on the Celo blockchain. Here is a [demo](https://kalondepeace.github.io/Celo-Faucet/) of what we will build. All the code can be found [here](https://github.com/kalondepeace/Celo-Faucet)
 
-### Table Of Contents
+## Table Of Contents
 - [Introduction](#introduction)
-- [Pre-requisites](#prerequisites).
-- [requirements](#prerequisites).
-- [Smart contract development](#smart-contract-development).
+- [Prerequisites](#prerequisites)
+- [Requirements](#requirements)
+- [Smart contract development](#smart-contract-development)
   * [Learning objective](#learning-objective)
-  * [Remix IDE](#11--remix-ide).
-  * [Solidity File Setup](#12--solidity-file-setup).
-  *[ERC20 interface](#13-erc20-interface).
-  * [Request Token](#14-request-token-function).
-  * [Swap Token](#15-swap-token-function).
+  * [Remix IDE](#11--remix-ide)
+  * [Solidity File Setup](#12--solidity-file-setup)
+  * [ERC20 interface](#13-erc20-interface)
+  * [Request Token](#14-request-token-function)
+  * [Swap Token](#15-swap-token-function)
   * [Get balance](#16-get-balance-function)
   * [Deploy smart contract](#17-deploy-the-smart-contract-on-the-celo-blockchain).
 - [Frontend Development](#front-end-development)
@@ -28,8 +31,8 @@ With the Celo blockchain's focus on accessibility and financial inclusion, build
     * [Read user's balance](#233-read-the-users-cusd-token-balance)
     * [Approve function](#234-approve-function)
     * [Event handlers](#24-event-handlers)
-    * [window loading for the first time](#241--window-loading-for-the-first-time)
-    * [Request tokens from your contract](#242-request-tokens-from-your-contracttime)
+    * [Window loading for the first time](#241--window-loading-for-the-first-time)
+    * [Request tokens from your contract](#242-request-tokens-from-your-contract)
     * [Swap token function](#243-swap-token-function)
     * [Contract token balance](#244-contract-token-balance-function)
  - [Host the dapp](#25-host-the-dapp-on-github-pages)
@@ -41,25 +44,24 @@ With the Celo blockchain's focus on accessibility and financial inclusion, build
 
 You need to be familiar with the following:
 
-- Prior knowledge of [javascript](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/JavaScript_basics#:~:text=JavaScript%20is%20a%20programming%20language,styling%3B%20with%20animation%2C%20etc.)
-- Familiarity with the command line
-- Prior knowledge on [blockchain](http://www.blockchain-basics.com/).
-- Prior knowledge on [Solidity](https://soliditylang.org/).
+- Prior knowledge of [Javascript](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/JavaScript_basics)
+- Familiarity with the [command line](https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Understanding_client-side_tools/Command_line)
+- Prior knowledge on [blockchain](http://www.blockchain-basics.com/)
+- Prior knowledge on [Solidity](https://soliditylang.org/)
 
 
 ## Requirements
-- **[NodeJS](https://nodejs.org/en/download)** from V12.or higher
-- A code editor or text editor. [VSCode](https://code.visualstudio.com/download) or [Sublime Text](https://www.sublimetext.com/).
+- **[NodeJS](https://nodejs.org/en/download)** from V12 or higher
+- A code or text editor. [VSCode](https://code.visualstudio.com/download) or [Sublime Text](https://www.sublimetext.com/)
 - Terminal or command line
 - An Internet Browser and good internet connection
 - **[Remix IDE](https://remix.ethereum.org)**
 - **[Celo Extension Wallet](https://chrome.google.com/webstore/detail/celoextensionwallet/kkilomkmpmkbdnfelcpgckmpcaemjcdh?hl=en)**.
 
 
-# Smart Contract Development
+## Smart Contract Development
 
-In this chapter, you will learn how to write a smart contract in the popular smart contract language Solidity and deploy it to the Celo blockchain.
-
+In this chapter, you will learn how to write a smart contract in the popular smart contract language - Solidity, and deploy it to the Celo blockchain.
 
 #### Learning Objective
 
@@ -70,17 +72,17 @@ In this chapter, you will learn how to write a smart contract in the popular sma
 In this tutorial, you will build the following smart contract: [Faucet.sol](./contract/faucet.sol)
 
 
-### 1.1  Remix IDE.
+### 1.1  Remix IDE
 
 Remix IDE is an open-source integrated development environment designed for writing, testing, and deploying smart contracts on the Ethereum blockchain. It provides a web-based interface that allows developers to write and compile Solidity smart contracts in their web browser, complete with features such as syntax highlighting, auto-completion, and code debugging. It also includes a built-in compiler that can compile Solidity code and generate bytecode for deployment on the Ethereum network.
 
-Remix IDE is notable for its integration with the Ethereum Virtual Machine (EVM), which allows developers to test their smart contracts locally without needing to deploy them to the Ethereum network. The IDE includes a local blockchain environment that can be used for testing and debugging. Remix IDE also includes several plugins and extensions that can be used to enhance its functionality,uch as the Remix Debugger which allows developers to step through their code and analyze the state of variables at each step.
+Remix IDE is notable for its integration with the Ethereum Virtual Machine (EVM), which allows developers to test their smart contracts locally without needing to deploy them to the Ethereum network. The IDE includes a local blockchain environment that can be used for testing and debugging. Remix IDE also includes several plugins and extensions that can be used to enhance its functionality, such as the Remix Debugger which allows developers to step through their code and analyze the state of variables at each step.
 
 
 ### 1.2  Solidity File Setup
 
 Open [Remix IDE](https://remix.ethereum.org/) in your browser and
-create a solidity file and name it `faucet.sol`
+create a solidity file and name it `Faucet.sol`
 
 Once the file is created, its time to start developing our smart contract.
 
@@ -92,7 +94,7 @@ pragma solidity >=0.7.0 <0.9.0;
 
 In the first line, you specify the license the contract uses. Here is a comprehensive list of the available [licenses](https://spdx.org/licenses/.)
 
-Using the `pragma` keyword, you specify the solidity version that you want the compiler to use. In this case, it should be higher than or seven and lower than nine. It is important to specify the version of the compiler because solidity changes constantly. If you want to execute older code without breaking it, you can do that by using an older compiler version.
+Using the `pragma` keyword, you specify the Solidity version that you want the compiler to use. In this case, it should be higher than or equal to seven and lower than nine. It is important to specify the version of the compiler because Solidity compilers are updated regularly. If you want to execute older code without breaking it, you can do that by using an older compiler version.
 
 
 ```solidity
@@ -104,7 +106,7 @@ You define your contract with the keyword `contract` and give it a name.
 
 
 ### 1.3 ERC20 interface
-In this tutorial, since you are going to be dealing with token transfers, you need an interface to interact with the tokens and perform actions lke transferring tokens.
+In this tutorial, since you are going to be dealing with token transfers, you need an interface to interact with the tokens and perform actions like transferring tokens.
 
 IERC20 is an interface for the standard implementation of a fungible token on the Ethereum blockchain. The acronym stands for "Ethereum Request for Comment 20", and it is a technical standard used to create and interact with tokens that have the same characteristics as the Ethereum cryptocurrency, Ether.
 
@@ -134,19 +136,18 @@ Now we have a way on how to interact with our tokens.
    uint ERC20_DECIMALS = 18;
 ```
 
-Create a variable `celoTokenAddress`. first, by specifying its type(address). Then you can specify its visibilty using the keyword  internal, because you want the variable to only be accessed inside the contract. [Learn more on visibility](https://docs.soliditylang.org/en/v0.8.18/contracts.html#visibility-and-getters)
+Create a variable `celoTokenAddress`. First, by specifying its type - (`address`). Then you can specify its visibilty using the keyword `internal`, because you want the variable to only be accessed inside the contract. [Learn more on visibility](https://docs.soliditylang.org/en/v0.8.18/contracts.html#visibility-and-getters)
 
-Assign it the contract address of the token(Celo), that we will be using in this tutorial.
+Assign it the contract address of the token (CELO), that we will be using in this tutorial.
 
-You declare a variable `ERC20_DECIMALS`, its of type uint. Assign it the number 18, which is the number of decimals the Celo token has. [learn more on token decimals](https://docs.openzeppelin.com/contracts/3.x/erc20)
-
+You declare a variable `ERC20_DECIMALS`, it is of type `uint`. Assign it the number 18, which is the number of decimals the Celo token has. [Learn more on token decimals](https://docs.openzeppelin.com/contracts/3.x/erc20)
 
 
 ### 1.4 Request Token Function
 
 In this section, you will enable users to request for test tokens from the faucet.
 Here is how the dapp will work.
-When a user requests test tokens, they will recieve 1 Celo in their address.
+When a user requests test tokens, they will recieve 1 CELO in their address.
 Users will only be able to request tokens once per 24 hours.
 
 ```solidity
@@ -168,9 +169,9 @@ contract Faucet{
   }
 }
 ```
-To track the last time the user requested for tokens, create a variable `lastRequest`. It is of type mapping. Mapping allows you to store key-value pairs. the key will be the address of the user, and the value will be the last time they requested the tokens. [learn more on mapping](https://docs.soliditylang.org/en/v0.8.18/types.html#)
+To track the last time the user requested for tokens, create a variable `lastRequest`. It is of type `mapping`. Mapping allows you to store key-value pairs. The key will be the address of the user, and the value will be the last time they requested the tokens. [Learn more on mapping](https://docs.soliditylang.org/en/v0.8.18/types.html#)
 
-You also declare a variable `requestAmount`, of type uint. Assign it the amount of tokens the user will recieve, in our case 1 Celo.
+You also declare a variable `requestAmount`, of type `uint`. Assign it the amount of tokens the user will receive, in our case 1 CELO.
 
 Next, create a function to let a user request tokens from the faucet and name it `requestTokens`.
 
@@ -178,23 +179,23 @@ You have to specify the type of parameter the function takes. In this case, an a
 
 You also define the visibility of the function as `public`.
 
-Inside the function, first check the last time the user requested for the tokens. It should be more than 24 hours from the current time. 
+Inside the function, first check the last time the user requested for the tokens. It is expected to be more than 24 hours from the last time a request was made from the user. 
 
-You make sure this condition is always met before sending the tokens, by using the keyword `require`. If the condition inside the require method fails, the whole function will stop executing. [Learn more about require](https://docs.soliditylang.org/en/v0.8.18/control-structures.html#error-handling-assert-require-revert-and-exceptions)
+You make sure this condition is always met before sending the tokens, by using the keyword `require`. If the condition inside the require method fails, the whole function will stop executing. [Learn more about require.](https://docs.soliditylang.org/en/v0.8.18/control-structures.html#error-handling-assert-require-revert-and-exceptions)
 
 
 Next, you check to make sure the smart contract has enough Celo tokens to send to the user. 
 
 If all the above conditions are met, you go ahead and transfer the amount of tokens requested from the contract to the user's address.
 
-Lastly, you update the last time that the user requested the tokens. Assign it the `block.timestamp`, which references the time when the function was executed. block.timestamp is a global variable. [Learn more about global variables](https://docs.soliditylang.org/en/v0.8.17/units-and-global-variables.html)
+Lastly, you update the last time that the user requested the tokens. Assign it the `block.timestamp`, which references the block time when the function was executed. **`block.timestamp`** is a global variable. [Learn more about global variables](https://docs.soliditylang.org/en/v0.8.17/units-and-global-variables.html)
 
 
 ### 1.5 Swap Token Function
 
-What should happens if a user needs more tokens when the 24 hour gap has not elapsed?. In this section, you will enable the user to receive Celo tokens by completing a certain task. 
+What should happens if a user needs more tokens when the 24 hour gap has not elapsed? In this section, you will enable the user to receive CELO tokens by completing a certain task. 
 
-The task for our case is deposting another token(cUSD) in our smart contract and in return, a user will receieve an equivalent amount of Celo tokens in their wallet.
+The task for our case is deposting another token i.e (cUSD), in our smart contract and in return, a user will receive an equivalent amount of CELO tokens in their wallet.
 
 ```solidity
 contract Faucet{
@@ -229,17 +230,16 @@ address internal cUsdTokenAddress =0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1;
 ```
 Declare a variable `cUsdTokenAddress` of type `address` and assign it the address of the token(cUSD) that the user will be depositing. 
 
-Next, create a function `swapToken` to let the user deposit cUSD tokens and receieve Celo tokens. The function is public because you want to access it from outside the contract.
+Next, create a function `swapToken()` to let the user deposit cUSD tokens and receive CELO tokens. The function is public because you want to access it from outside the contract.
 
 
->Notice:
-For this tutorial, you have used two tokens which have the same number of decimals. An amount in one token when converted to another token does not change. In real world applications, you may interact with tokens that have different decimals.
+> **Note** For this tutorial, you have used two tokens which have the same number of decimals. An amount in one token when converted to another token does not change. In real world applications, you may interact with tokens that have different decimals.
 
-Inside the function, create a variable of type uint and assign it the amount of tokens that the user has deposited. You will send the exact amount the user deposits, but in a diferent token.
+Inside the function, create a variable of type `uint` and assign it the amount of tokens that the user has deposited. You will send the exact amount the user deposits, but in a diferent token.
 
 Next, check that the smart contract has the amount that user has requested to deposit. 
 
-First, transfer the cUSd from the user's wallet to the smart contract. Then transfer an equivalent amount od Celo tokens from the smart contract to the user's wallet address.
+First, transfer the cUSD from the user's wallet to the smart contract. Then transfer an equivalent amount of CELO tokens from the smart contract to the user's wallet address.
 
 If any of the transaction fails, the smart contract will display an error message.
 
@@ -251,7 +251,7 @@ In this section, you will write a function to show the user the amount of tokens
 ```solidity
 contract Faucet{
 
-   function contractTokenBalance() public view returns(uint _celoBalance,uint _cUSDBalance){
+   function contractTokenBalance() public view returns(uint _celoBalance, uint _cUSDBalance){
         return (
           IERC20Token(celoTokenAddress).balanceOf(address(this)),
           IERC20Token(cUsdTokenAddress).balanceOf(address(this))
@@ -259,28 +259,25 @@ contract Faucet{
     }
   }
 ```
-Create a function `contractTokenBalance`. It doesnt take in any parameter because it will only return the balance of smart contract. It is of type view. This means that the function will access and read from the state and global variables. [Learn more on View and Pure functions](https://solidity-by-example.org/view-and-pure-functions/)
+Create a function `contractTokenBalance()`. It does not take in any parameter because it will only return the balance of smart contract. It is of type *view*. This means that the function will access and read from the state and global variables. [Learn more on View and Pure functions](https://solidity-by-example.org/view-and-pure-functions/)
 
-The function returns two values `_celoBalance` and ` _cUSDBalance`, of type uint. 
+The function returns two values `_celoBalance` and ` _cUSDBalance`. Both of type `uint`. 
 
 
-Inside the function, you will use the keyword `return` to return the Celo token balance and cUSD token balance of the smart contract. Using the ERC20 token interface and the address of the token, you call the balanceOf method. It takes in one parameter which is the address to use.
+Inside the function, you will use the keyword `return` to return the CELO token balance and cUSD token balance of the smart contract. Using the ERC20 token interface and the address of the token, you call the `balanceOf()` method. It takes in one parameter which is the address to use.
 
 You access the address of the contract using the `address(this)` method because you want to return its balance.
 
 You check for the balance of two tokens stored in the smart contract.
 
 
-
 ### 1.7 Deploy the Smart Contract on the Celo blockchain.
 
-In this section, you will you will create a Celo wallet and deploy your contract to the Celo testnet alfajores.
+In this section, you will you will create a Celo wallet and deploy your contract to the Celo alfajores testnet.
   
-  I have created a separate guide on how to delpoy the smart contract on Celo blockchain. Check it out here.
-
+  I have created a separate guide on how to deploy the smart contract on Celo blockchain. Check it out [here]().
 
   If you follow all the steps in the above guide, you should be able to deploy your contract on the Celo blockchain. 
-
 
 
   # Front End Development
@@ -329,12 +326,12 @@ npm install
 ```bash
 npm run dev
 ````
-Your project should be up and running. Access it on htp://localhost:3000 in your browser
+Your project should be up and running. Access it on *http://localhost:3000* in your browser.
 
 
 ### 2.2 The HTML of the Dapp (3 minutes)
 
-In this section, you will start with basics of your Dapp, the HTML
+In this section, you will start with basics of your Dapp, the HTML.
 
 Using your favorite code editor, open the index.html file inside the public folder of the project
 
@@ -373,7 +370,7 @@ Start by declaring the document type, followed by the head element and meta tags
 
 </head>
 ```
-Import external stylesheets, one of which is bootstrap, a popular front-end library that allows you to create resaponsive websites with ease.[Learn more on bootstrap](https://getbootstrap.com/)
+Import external stylesheets, one of which is Bootstrap, a popular front-end library that allows you to create responsive websites with ease. [Learn more on Bootstrap](https://getbootstrap.com/).
 
 And then, add a title.
 
@@ -474,7 +471,7 @@ Inside the body tag, create a naviagtion bar to display the name of the dapp and
 </div>
 
 ```
-Create a div for the notifications that you want to display to the user. This div has the class alert that you will later select in your JS code. The span element has the id notification, that you will use to insert the text that you want to display.
+Create a **div** for the notifications that you want to display to the user. This div has the class alert that you will later select in your JS code. The span element has the id "notification", that you will use to insert the text that you want to display.
 
 
 ```html
@@ -483,7 +480,7 @@ Create a div for the notifications that you want to display to the user. This di
 ```
 Add the main tag with the id faucet. We will render our content inside this tag.
 
-You will use flex box to display three div elements inside the main tag.
+You will use flex box to display three **div** elements inside the main tag.
 
 ```html
  <div class="d-flex flex-row overall">
@@ -506,7 +503,7 @@ You will use flex box to display three div elements inside the main tag.
     </div>
 ```
 
-The first div displays an interface to enable the user to request tokens from the dapp.
+The first **div** displays an interface to enable the user to request tokens from the dapp.
 
 ```html
 <div class="p-2 second">
@@ -536,11 +533,10 @@ The first div displays an interface to enable the user to request tokens from th
 </div>
 
 ```
-Inside the second div element, create a table element to display the token balances from the smart contract.
-Then, create an ordered lsit elemt to display some notice for the user.
+Inside the second **div** element, create a table element to display the token balances from the smart contract.
+Then, create an ordered list elememt to display some notice for the user.
 
 The last list item displays the address of the smart contract because you want a user to send excess test tokens back to the smart contract.
-
 
 ```html
 <div class="p-2 third">
@@ -557,24 +553,23 @@ The last list item displays the address of the smart contract because you want a
       </main>
     </div>
 ```
-Create a div element to enable a user to swap cUSD tokens for Celo tokens.
+Create a **div** element to enable a user to swap cUSD tokens for CELO tokens.
 
-
-Here is how the dapp should like with only the HTML now.
+Here is how the dapp should like with only the HTML and Styling (CSS and Bootstrap) now.
 ![Dapp interface](./real.png)
 
 
 
 ### 2.3 The JS of your dapp(8 minutes)
 
-In this section of the tutorial, you will add the basic functionality of your DApp. You will create a functioning dapp in vanilla Javascript with sample products that is not yet connected to the Celo blockchain.
+In this section of the tutorial, you will add the basic functionality of your dapp. You will create a functioning dapp in vanilla Javascript with sample products that is not yet connected to the Celo blockchain.
 
 
 #### 2.3.1 Interact with the smart contract
 
-In this section of the tutorial, you are going to use the contractKit library to interact with the Celo Blockchain. ContractKit includes web3.js, a very popular collection of libraries also used for ethereum, that allows you to get access to a web3 object and interact with node's JSON RPC API (Learn more about contractKit).
+In this section of the tutorial, you are going to use the **contractKit** library to interact with the Celo Blockchain. ContractKit includes **web3.js**, a very popular collection of libraries also used for Ethereum, that allows you to get access to a web3 object and interact with node's JSON RPC API (Learn more about [contractKit](https://docs.celo.org/developer/contractkit)).
 
-In order to interact with your smart contract, you need its ABI(Application Binary Interface). When you compile the contract in Remix, you create an ABI in a Json format. copy it and poaste it in the `faucet.abi.json` file inside the contract folder.
+In order to interact with your smart contract, you need its ABI (Application Binary Interface). When you compile the contract in Remix IDE, you create an ABI in a JSON format. Copy the ABI from Remix IDE and paste it in the `faucet.abi.json` file inside the contract folder.
 
 
 ```js
@@ -590,13 +585,13 @@ let contract
 let accounts
 ````
 In the `main.js `file inside the `src` folder
-Import the newKitFromWeb3, Web3, and BigNumber objects from their respective libraries.
+Import the `newKitFromWeb3`, `Web3`, and `BigNumber` objects from their respective libraries.
 
-Many Celo operations operate on numbers that are outside the range of values used in Javascript. In this case we will use bignumber.js because it can handle these numbers.
+Many Celo operations operate on numbers that are outside the range of values used in Javascript. In this case we will use `bignumber.js` because it can handle these numbers.
 
-Create the variable ERC20_DECIMALS and set it to 18. By default, the ERC20 interface uses a value of 18 for decimals. Since cUSD, the Celo currency that you are going to use here, is an ERC20 token, use ERC20_DECIMALS to convert values.
+Create the variable `ERC20_DECIMALS` and set it to 18. By default, the ERC20 interface uses a value of 18 for decimals. Since cUSD, the Celo currency that you are going to use here, is an ERC20 token, use `ERC20_DECIMALS` to convert values.
 
-You should also declare global variables for contractKit, contract and accounts because you are going to need them for multiple functions.
+You should also declare global variables for `contractKit`, `contract` and `accounts` because you are going to need them for multiple functions.
 
 ```js
 const faucetContractAddress = "0x3d750214E24A89C9a0A2259421AE361dA1753D67"
@@ -604,12 +599,12 @@ const faucetContractAddress = "0x3d750214E24A89C9a0A2259421AE361dA1753D67"
 const celoCOntractAddress = "0xF194afDf50B03e69Bd7D057c1Aa9e10c9954E4C9"
 
 ````
-When you delpoy the contract, you will need its address in order to interact with it. Declare three variable; `faicetContractAddress` to hold the address of the contract and `celoContractAddress` to hold the address of the celo token
+When you delpoy the contract, you will need its address in order to interact with it. Declare three variable `faicetContractAddress` to hold the address of the contract and `celoContractAddress` to hold the address of the CELO token.
 
 
 #### 2.3.2 Connect to Celo Blockchain
 
-In thi section, you will create a function to connect to the Celo extension wallet.
+In this section, you will create a function to connect to the **CeloExtensionWallet**.
 
 ```js
 const connectCeloWallet = async function () {
@@ -631,27 +626,27 @@ const connectCeloWallet = async function () {
 }
 ````
 
-Create a new asynchronous function called `connectCeloWallet` that you will then use to connect to the Celo Blockchain and read the balance of the user.
+Create a new asynchronous function called `connectCeloWallet()` that you will then use to connect to the Celo blockchain and read the balance of the user.
 
-First, check if the user has installed the CeloExtensionWallet. Do that by checking if the “window.celo” object exists. If it doesn’t exist, use a notification to let them know that they need to install the wallet.
+First, check if the user has installed the **CeloExtensionWallet**. Do that by checking if the “window.celo” object exists. If it doesn’t exist, use a notification to let them know that they need to install the wallet.
 
-If the object does exist, send them a notification that they need to approve this DApp and try the window.celo.enable() function. This will open a pop-up dialogue in the UI that asks for permission to connect the DApp to the CeloExtensionWallet. After Celo is enabled, you should disable the notification.
+If the object does exist, send them a notification that they need to approve this dapp and try the `window.celo.enable()` function. This will open a pop-up dialogue in the UI that asks for permission to connect the DApp to the CeloExtensionWallet. After Celo is enabled, you should disable the notification.
 
-If you catch an error, let the user know that they must approve the dialogue to use the DApp.
+If you catch an error, let the user know that they must approve the dialogue to use the dapp.
 
-Once the user approves the DApp, create a web3 object using the window.celo object as the provider. With this web3 object, you can create a new kit instance that you can save to the global kit variable. Now, the functionality of the connected kit can interact with the Celo Blockchain.
+Once the user approves the dapp, create a web3 object using the **window.celo** object as the provider. With this web3 object, you can create a new kit instance that you can save to the global `kit` variable. Now, the functionality of the connected kit can interact with the Celo blockchain.
 
 
 ```js
  const accounts = await kit.web3.eth.getAccounts()
       kit.defaultAccount = accounts[0]
 ````
-Add this code beneath the kit instance in your connectCeloWallet function. This returns an array of addresses of the connected user. The first address in the array is set as the default account
+Add this code beneath the kit instance in your `connectCeloWallet()` function. This returns an array of addresses of the connected user. The first address in the array is set as the default account.
 
 
 #### 2.3.3 Read the user's cUSD token balance
 
-In this section, you will create a function to read the token balance of the user on the Celo blockchain
+In this section, you will create a function to read the token balance of the user on the Celo blockchain.
 
 ```js
 const getBalance = async function () {
@@ -660,17 +655,15 @@ const getBalance = async function () {
   document.querySelector("#balance").textContent = cUSDBalance
 }
 ````
-Create an asynchronous function `getBalance`. With kit’s method kit.getTotalBalance, you can get the total balance of an account. In this case, you want the balance from the account that interacts with the CeloExtensionWallet, the one you stored in kit.defaultAccount.
+Create an asynchronous function `getBalance()`. With kit’s method `kit.getTotalBalance()`, you can get the total balance of an account. In this case, you want the balance from the account that interacts with the CeloExtensionWallet, the one you stored in `kit.defaultAccount`.
 
-In the next line, you get a readable cUSD balance. Use totalBalance.cUSD.to get the cUSD balance. Since it’s a big number, convert it to be readable by shifting the comma 18 places to the left and use toFixed(2) to display only two decimal places after the decimal point.
+In the next line, you get a readable cUSD balance. Use `totalBalance.cUSD` to get the cUSD balance. Since it’s a big number, convert it to be readable by shifting the comma 18 places to the left and use toFixed(2) to display only two decimal places after the decimal point.
 
-Display the cUSDBalance in the corresponding HTML element.
+Display the `cUSDBalance` in the corresponding HTML element.
 
 #### 2.3.4 Approve Function
 
 ```js
-
-
 async function celoApprove(_price) {
         const cUSDContract = new kit.web3.eth.Contract(erc20Abi, celoCOntractAddress)
 
@@ -684,7 +677,6 @@ async function celoApprove(_price) {
 ### 2.4 Event handlers
 In this section, you will learn to add event listeners and handle events.
 
-
 #### 2.4.1  Window loading for the first time.
 
 ```js
@@ -697,14 +689,13 @@ window.addEventListener('load', async () => {
 });
 ```
 
-When the window loads for the first time, you want to show the user that the page is loading using the notification function.
+When the window loads for the first time, you want to show the user that the page is loading using the `notification()` function.
 
 Then you run a function to connect to the Celo wallet.
 
-Next, Get the balance of the wallet connected to the Dapp and finally retreive the token balance of the smart contract.
+Next, get the balance of the wallet connected to the dapp and finally retreive the token balance of the smart contract.
 
-
-#### 2.4.2 Request tokens from your contract(time)
+#### 2.4.2 Request tokens from your contract
 
 In this section of the tutorial, you will connect to your smart contract, as well as request tokens from it when a certain event happens.
 
@@ -734,13 +725,13 @@ When the user clicks on a button with the id `requestToken`, you get the value o
 
 Notify the user of what is happening.
 
-Call the requestToken function.It takes in one parameter, the address of the wallet to receive the tokens.
+Call the requestToken function. It takes in one parameter, the address of the wallet to receive the tokens.
 
 If there is an error in the function execution, you will display a message to the user.
 
 
 #### 2.4.3 Swap token function
-In this section, you will learn how to create a swap token function to allow a user to exchange their cuSD tokens for Celo tokens.
+In this section, you will learn how to create a swap token function to allow a user to exchange their cUSD tokens for CELO tokens.
 
 ```js
 const cUSDContractAddress = "0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1"
@@ -756,7 +747,7 @@ async function cUSDApprove(_price) {
 ```
  Create a variable `cUSDContractAddess` to hold the contract address of the cUSD token.
 
- Next, create a copy of the celoApprove function and modify it to cater for cUSD.
+ Next, create a copy of the `celoApprove()` function and modify it to cater for cUSD.
 
 ```js
   document
@@ -783,10 +774,12 @@ async function cUSDApprove(_price) {
     }
 
 ```
-When the user clicks on a button with the id swapToken, you get the value of the element with id `swapAmount`. This is the amount of cUSD the user wants to swap.
-You convert the value to a Big Number with 18 decimals using the BigNumber method.
+When the user clicks on a button with the id "**swapToken**", you get the value of the element with id `swapAmount`. This is the amount of cUSD the user wants to swap.
 
-Next, call the cUSDApprove function to allow the smart contract spend funds on behalf of the user.
+You convert the value to a **BigNumber** with 18 decimals using the `BigNumber()` class.
+
+Next, call the `cUSDApprove()` function to allow the smart contract spend funds on behalf of the user.
+
 The function takes in one parameter, which is the amount the user wants to spend.
 
 Then call the swap function on the contract. This will deduct the cUSD from the user's account and in exchange, deposit an equivalent number of Celo tokens to the user's address.
@@ -815,7 +808,7 @@ In this section, you will learn how to write a function to get the balance of th
   }
 ````
 
-Declare an async function `getContractBalance`. Inside the function, call the contractTokenBalance method on the smart contract. It returns an object containing the Celo and cUSD token balance for the smart contract. 
+Declare an async function `getContractBalance`. Inside the function, call the contractTokenBalance method on the smart contract. It returns an object containing the CELO and cUSD token balance for the smart contract. 
 
 Next, update the text context of the elements with ids `celoBal` and `cUSDBal` with their values respectively. 
 
@@ -832,12 +825,12 @@ function notificationOff() {
 }
 
 ````
-Create a `notification` function that displays the alert. It takes in text as the parameter and a `notificationOff` function that stops showing the alert message.
+Create a `notification` function that displays the alert. It takes in text as the parameter and a `notificationOff()` function that stops showing the alert message.
 
 
- ### 2.5 Host the dapp on Github Pages
+### 2.5 Host the dapp on Github Pages
 
- In this section, you will learn how to host your completed project on Github Pages.
+In this section, you will learn how to host your completed project on **Github Pages**.
 
 After testing that your dapp works correctly, it is time to build your dapp. Run this command in your terminal
 
@@ -848,8 +841,8 @@ npm run build
 Upon completion, you will now have a new folder `docs` containing an `index.html` and `main.js` file.
 
 - Upload your project to a new GitHub repository.
-- Once inside your repository, click on settings and scroll down to a section called GitHub Pages.
-- Select the master branch and the docs folder as the source for your GitHub pages.
+- Once inside your repository, click on settings and scroll down to a section called "**GitHub Pages**".
+- Select the master branch and the docs folder as the source for your GitHub Pages.
 
 Congratulations, you have made it to the end. You now have a fully functional dapp running on the Celo blockchain.
 

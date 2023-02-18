@@ -19,7 +19,7 @@ contract tokenSwap{
 
     uint ERC_DECIMALS = 18;
 
-    address internal cUsdTokenAddress =0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1;
+    address internal cUsdTokenAddress = 0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1;
     address internal celoTokenAddress = 0xF194afDf50B03e69Bd7D057c1Aa9e10c9954E4C9;
 
 
@@ -29,11 +29,12 @@ contract tokenSwap{
 
     mapping (address => uint) public lastClaim;
 
-    uint requestAmount = 10** ERC_DECIMALS;
+    uint requestAmount = 10 ** ERC_DECIMALS;
 
 
 
-    //swap cUsd for celo
+    /// @notice Swap cUsd for celo
+    /// @param _amount Amount of token to swap
     function swapToken(uint _amount) public{
 
       uint celoAmount = _amount;
@@ -61,7 +62,8 @@ contract tokenSwap{
     }
 
 
-    //claim tokens to use. 
+    /// @notice Claim tokens to use
+    /// @param _to Address to token receiver
     function requestTokens(address _to) public{
 
         require((lastClaim[_to] + 1 days) < block.timestamp,"You only claim once in 24 hours");
@@ -75,8 +77,8 @@ contract tokenSwap{
 
    
 
-    //return token balance for the contract
-    function contractTokenBalance() public view returns(uint _celoBalance,uint _cUSDBalance){
+    /// @notice Return token balance for the contract
+    function contractTokenBalance() public view returns(uint _celoBalance, uint _cUSDBalance){
         return (
           IERC20Token(celoTokenAddress).balanceOf(address(this)),
           IERC20Token(cUsdTokenAddress).balanceOf(address(this))
