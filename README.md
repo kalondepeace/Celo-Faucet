@@ -1,12 +1,6 @@
-
-
 # Beginner's guide to building a Token Faucet dapp on the Celo blockchain.
-## Introduction
-Building a token faucet on the Celo blockchain can be an exciting project for developers interested in exploring decentralized finance (DeFi) and blockchain technology. Token faucets are a popular tool in the world of blockchain, as they allow users to obtain a small amount of a particular cryptocurrency for free. This can be useful for testing purposes, user adoption, or community engagement. 
 
-With the Celo blockchain's focus on accessibility and financial inclusion, building a token faucet on this platform can help to provide users with easy access to digital assets and drive the adoption of the Celo ecosystem. In this guide, we will explore the steps involved in building a token faucet on the Celo blockchain, including the necessary tools, resources, and best practices to create a functional and secure faucet and deploy it on the Celo blockchain. Here is a [demo](https://kalondepeace.github.io/Celo-Faucet/) of what we will build. All the code can be found [here](https://github.com/kalondepeace/Celo-Faucet)
-
-### Table Of Contents
+## Table Of Contents
 - [Introduction](#introduction)
 - [Pre-requisites](#prerequisites).
 - [requirements](#prerequisites).
@@ -36,6 +30,12 @@ With the Celo blockchain's focus on accessibility and financial inclusion, build
  - [Conclusion](#conclusion)
  - [Author](#author)
 
+## Introduction
+Building a token faucet on the Celo blockchain can be an exciting project for developers interested in exploring decentralized finance (DeFi) and blockchain technology. Token faucets are a popular tool in the world of blockchain, as they allow users to obtain a small amount of a particular cryptocurrency for free. This can be useful for testing purposes, user adoption, or community engagement. 
+
+With the Celo blockchain's focus on accessibility and financial inclusion, building a token faucet on this platform can help to provide users with easy access to digital assets and drive the adoption of the Celo ecosystem. In this guide, we will explore the steps involved in building a token faucet on the Celo blockchain, including the necessary tools, resources, and best practices to create a functional and secure faucet and deploy it on the Celo blockchain. Here is a [demo](https://kalondepeace.github.io/Celo-Faucet/) of what we will build. All the code can be found [here](https://github.com/kalondepeace/Celo-Faucet)
+
+
 
 ## Prerequisites
 
@@ -51,17 +51,17 @@ You need to be familiar with the following:
 - **[NodeJS](https://nodejs.org/en/download)** from V12.or higher
 - A code editor or text editor. [VSCode](https://code.visualstudio.com/download) or [Sublime Text](https://www.sublimetext.com/).
 - Terminal or command line
-- An Internet Browser and good internet connection
+- An Internet Browser and a good internet connection
 - **[Remix IDE](https://remix.ethereum.org)**
 - **[Celo Extension Wallet](https://chrome.google.com/webstore/detail/celoextensionwallet/kkilomkmpmkbdnfelcpgckmpcaemjcdh?hl=en)**.
 
 
-# Smart Contract Development
+## Smart Contract Development
 
 In this chapter, you will learn how to write a smart contract in the popular smart contract language Solidity and deploy it to the Celo blockchain.
 
 
-#### Learning Objective
+### Learning Objective
 
 - [x] Learn how to write smart contracts in Solidity with the Remix IDE.
 - [x] Write a smart contract for a token faucet.
@@ -70,11 +70,11 @@ In this chapter, you will learn how to write a smart contract in the popular sma
 In this tutorial, you will build the following smart contract: [Faucet.sol](./contract/faucet.sol)
 
 
-### 1.1  Remix IDE.
+### 1.1  Remix IDE
 
-Remix IDE is an open-source integrated development environment designed for writing, testing, and deploying smart contracts on the Ethereum blockchain. It provides a web-based interface that allows developers to write and compile Solidity smart contracts in their web browser, complete with features such as syntax highlighting, auto-completion, and code debugging. It also includes a built-in compiler that can compile Solidity code and generate bytecode for deployment on the Ethereum network.
+Remix IDE is an open-source integrated development environment designed for writing, testing, and deploying smart contracts on the Ethereum blockchain. It provides a web-based interface that allows developers to write and compile Solidity smart contracts in their web browser, complete with features such as syntax highlighting, auto-completion and code debugging. It also includes a built-in compiler that can compile Solidity code and generate bytecode for deployment on the Ethereum network.
 
-Remix IDE is notable for its integration with the Ethereum Virtual Machine (EVM), which allows developers to test their smart contracts locally without needing to deploy them to the Ethereum network. The IDE includes a local blockchain environment that can be used for testing and debugging. Remix IDE also includes several plugins and extensions that can be used to enhance its functionality,uch as the Remix Debugger which allows developers to step through their code and analyze the state of variables at each step.
+Remix IDE is notable for its integration with the Ethereum Virtual Machine (EVM), which allows developers to test their smart contracts locally without needing to deploy them to the Ethereum network. The IDE includes a local blockchain environment that can be used for testing and debugging. Remix IDE also includes several plugins and extensions that can be used to enhance its functionality, such as the Remix Debugger which allows developers to step through their code and analyze the state of variables at each step.
 
 
 ### 1.2  Solidity File Setup
@@ -82,7 +82,7 @@ Remix IDE is notable for its integration with the Ethereum Virtual Machine (EVM)
 Open [Remix IDE](https://remix.ethereum.org/) in your browser and
 create a solidity file and name it `faucet.sol`
 
-Once the file is created, its time to start developing our smart contract.
+Once the file is created, it's time to start developing our smart contract.
 
 ```solidity
 // SPDX-License-Identifier: MIT  
@@ -92,7 +92,7 @@ pragma solidity >=0.7.0 <0.9.0;
 
 In the first line, you specify the license the contract uses. Here is a comprehensive list of the available [licenses](https://spdx.org/licenses/.)
 
-Using the `pragma` keyword, you specify the solidity version that you want the compiler to use. In this case, it should be higher than or seven and lower than nine. It is important to specify the version of the compiler because solidity changes constantly. If you want to execute older code without breaking it, you can do that by using an older compiler version.
+Using the `pragma` keyword, you specify the solidity version that you want the compiler to use. In this case, it should be higher than seven and lower than nine. It is important to specify the version of the compiler because solidity changes constantly. If you want to execute older code without breaking it, you can do that by using an older compiler version.
 
 
 ```solidity
@@ -104,7 +104,7 @@ You define your contract with the keyword `contract` and give it a name.
 
 
 ### 1.3 ERC20 interface
-In this tutorial, since you are going to be dealing with token transfers, you need an interface to interact with the tokens and perform actions lke transferring tokens.
+In this tutorial, since you are going to be dealing with token transfers, you need an interface to interact with the tokens and perform actions like transferring tokens.
 
 IERC20 is an interface for the standard implementation of a fungible token on the Ethereum blockchain. The acronym stands for "Ethereum Request for Comment 20", and it is a technical standard used to create and interact with tokens that have the same characteristics as the Ethereum cryptocurrency, Ether.
 
@@ -134,23 +134,22 @@ Now we have a way on how to interact with our tokens.
    uint ERC20_DECIMALS = 18;
 ```
 
-Create a variable `celoTokenAddress`. first, by specifying its type(address). Then you can specify its visibilty using the keyword  internal, because you want the variable to only be accessed inside the contract. [Learn more on visibility](https://docs.soliditylang.org/en/v0.8.18/contracts.html#visibility-and-getters)
+Create a variable `celoTokenAddress`. first, by specifying its type(address). Then you can specify its visibility using the keyword  `internal` because you want the variable to only be accessed inside the contract. [Learn more on visibility](https://docs.soliditylang.org/en/v0.8.18/contracts.html#visibility-and-getters)
 
 Assign it the contract address of the token(Celo), that we will be using in this tutorial.
 
-You declare a variable `ERC20_DECIMALS`, its of type uint. Assign it the number 18, which is the number of decimals the Celo token has. [learn more on token decimals](https://docs.openzeppelin.com/contracts/3.x/erc20)
+You declare a variable `ERC20_DECIMALS`, of type uint. Assign it the number 18, which is the number of decimals the Celo token has. [learn more on token decimals](https://docs.openzeppelin.com/contracts/3.x/erc20)
 
 
 
 ### 1.4 Request Token Function
 
-In this section, you will enable users to request for test tokens from the faucet.
-Here is how the dapp will work.
-When a user requests test tokens, they will recieve 1 Celo in their address.
-Users will only be able to request tokens once per 24 hours.
+In this section, you will enable users to request test tokens from the faucet.
+Here is how the dapp will work:
+  - When a user requests test tokens, they will receive 1 Celo in their address.
+  - Users will only be able to request tokens once per 24 hours.
 
 ```solidity
-
 contract Faucet{
   mapping (address => uint) public lastRequest;
 
@@ -178,9 +177,9 @@ You have to specify the type of parameter the function takes. In this case, an a
 
 You also define the visibility of the function as `public`.
 
-Inside the function, first check the last time the user requested for the tokens. It should be more than 24 hours from the current time. 
+Inside the function, first, check the last time the user requested for the tokens. It should be more than 24 hours from the current time. 
 
-You make sure this condition is always met before sending the tokens, by using the keyword `require`. If the condition inside the require method fails, the whole function will stop executing. [Learn more about require](https://docs.soliditylang.org/en/v0.8.18/control-structures.html#error-handling-assert-require-revert-and-exceptions)
+You make sure this condition is always met before sending the tokens, by using the keyword `require`. If the condition inside the `require` method fails, the whole function will stop executing. [Learn more about require](https://docs.soliditylang.org/en/v0.8.18/control-structures.html#error-handling-assert-require-revert-and-exceptions)
 
 
 Next, you check to make sure the smart contract has enough Celo tokens to send to the user. 
@@ -192,9 +191,9 @@ Lastly, you update the last time that the user requested the tokens. Assign it t
 
 ### 1.5 Swap Token Function
 
-What should happens if a user needs more tokens when the 24 hour gap has not elapsed?. In this section, you will enable the user to receive Celo tokens by completing a certain task. 
+What should happen if a user needs more tokens when the 24 hour gap has not elapsed? In this section, you will enable the user to receive Celo tokens by completing a certain task. 
 
-The task for our case is deposting another token(cUSD) in our smart contract and in return, a user will receieve an equivalent amount of Celo tokens in their wallet.
+The task for our case is depositing another token(cUSD) in our smart contract and in return, a user will receive an equivalent amount of Celo tokens in their wallet.
 
 ```solidity
 contract Faucet{
@@ -235,11 +234,11 @@ Next, create a function `swapToken` to let the user deposit cUSD tokens and rece
 >Notice:
 For this tutorial, you have used two tokens which have the same number of decimals. An amount in one token when converted to another token does not change. In real world applications, you may interact with tokens that have different decimals.
 
-Inside the function, create a variable of type uint and assign it the amount of tokens that the user has deposited. You will send the exact amount the user deposits, but in a diferent token.
+Inside the function, create a variable of type uint and assign it the amount of tokens that the user has deposited. You will send the exact amount the user deposits but in a different token.
 
 Next, check that the smart contract has the amount that user has requested to deposit. 
 
-First, transfer the cUSd from the user's wallet to the smart contract. Then transfer an equivalent amount od Celo tokens from the smart contract to the user's wallet address.
+First, transfer the cUSd from the user's wallet to the smart contract. Then transfer an equivalent amount of Celo tokens from the smart contract to the user's wallet address.
 
 If any of the transaction fails, the smart contract will display an error message.
 
@@ -282,12 +281,12 @@ In this section, you will you will create a Celo wallet and deploy your contract
 
 
 
-  # Front End Development
+## Front End Development
 
-  In this chapter, you will create learn to build a user interface for your dapp, and connect it to your smart contract.
+In this chapter, you will create learn to build a user interface for your dapp, and connect it to your smart contract.
 
 
-  ### Learning objective
+### Learning objective
 
 - [x] Learn how to write the HTML and JS part of your DApp.
 - [x] Connect your DApp to your smart contract on the Celo blockchain with the library ContractKit.
@@ -305,7 +304,7 @@ At the end of this chapter, you should have something similar to this. (User Int
 
 To speed up the development process, you are going to use a boilerplate. It comes with the necessary libraries and packages required for our dapp.
 
-1 Open your terminal and clone the boilerplate from the repository
+1. Open your terminal and clone the boilerplate from the repository
 
 ```bash
 git clone https://github.com/kalondepeace/faucet-boilerplate-template.git
@@ -333,7 +332,7 @@ Your project should be up and running. Access it on htp://localhost:3000 in your
 
 ### 2.2 The HTML of the Dapp (3 minutes)
 
-In this section, you will start with basics of your Dapp, the HTML
+In this section, you will start with the basics of your Dapp, the HTML
 
 Using your favorite code editor, open the index.html file inside the public folder of the project
 
@@ -372,7 +371,7 @@ Start by declaring the document type, followed by the head element and meta tags
 
 </head>
 ```
-Import external stylesheets, one of which is bootstrap, a popular front-end library that allows you to create resaponsive websites with ease.[Learn more on bootstrap](https://getbootstrap.com/)
+Import external stylesheets, one of which is bootstrap, a popular front-end library that allows you to create responsive websites with ease.[Learn more on bootstrap](https://getbootstrap.com/)
 
 And then, add a title.
 
@@ -668,8 +667,6 @@ Display the cUSDBalance in the corresponding HTML element.
 #### 2.3.4 Approve Function
 
 ```js
-
-
 async function celoApprove(_price) {
         const cUSDContract = new kit.web3.eth.Contract(erc20Abi, celoCOntractAddress)
 
@@ -683,9 +680,7 @@ async function celoApprove(_price) {
 ### 2.4 Event handlers
 In this section, you will learn to add event listeners and handle events.
 
-
 #### 2.4.1  Window loading for the first time.
-
 ```js
 window.addEventListener('load', async () => {
   notification("⌛ Loading...")
@@ -768,7 +763,6 @@ async function cUSDApprove(_price) {
                         .toString()
     
     try{
-
       await cUSDApprove(tokenAmount)
 
       const result = await contract.methods
@@ -834,9 +828,9 @@ function notificationOff() {
 Create a `notification` function that displays the alert. It takes in text as the parameter and a `notificationOff` function that stops showing the alert message.
 
 
- ### 2.5 Host the dapp on Github Pages
+### 2.5 Host the dapp on Github Pages
 
- In this section, you will learn how to host your completed project on Github Pages.
+In this section, you will learn how to host your completed project on Github Pages.
 
 After testing that your dapp works correctly, it is time to build your dapp. Run this command in your terminal
 
@@ -856,7 +850,6 @@ Congratulations, you have made it to the end. You now have a fully functional da
 In this tutorial, you have learnt how to build a full stack faucet dapp running on Celo blockchain, and deploying it to Github Pages. With the knowledge gained, you can now apply it to build more fully functional dapps.
 
 ## Author
-
 Peace is a Computer Engineering Student. She is passionate about new and trending technologies.
 For contributions,feel free to check my [github](https://github.com/kalondepeace) account.
 
