@@ -2,6 +2,8 @@
 
 # Beginner's guide to building a Token Faucet Dapp on the Celo blockchain
 
+* Estimated Reading Time: 18 minutes*
+
 ## Introduction
 Building a token faucet on the Celo blockchain can be an exciting project for developers interested in exploring decentralized finance (DeFi) and blockchain technology. Token faucets are a popular tool in the world of blockchain, as they allow users to obtain a small amount of a particular cryptocurrency for free. This can be useful for testing purposes, user adoption, or community engagement. 
 
@@ -15,7 +17,7 @@ With the Celo blockchain's focus on accessibility and financial inclusion, build
   * [Learning objective](#learning-objective)
   * [Remix IDE](#11--remix-ide)
   * [Solidity File Setup](#12--solidity-file-setup)
-  *[ERC20 interface](#13-erc20-interface)
+  * [ERC20 interface](#13-erc20-interface)
   * [Request Token](#14-request-token-function)
   * [Swap Token](#15-swap-token-function)
   * [Get balance](#16-get-balance-function)
